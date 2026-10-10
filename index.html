@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#3d4a1f">
+<meta name="description" content="Plan de estudio para la Promoción General 2026 – Capitán Primero Enfermera. Tus datos se guardan solo en tu dispositivo.">
+<title>Plan de Ascenso · Cap. 1/o. Enfermera</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%233d4a1f'/%3E%3Cpath d='M14 40l18-12 18 12M14 30l18-12 18 12' stroke='%23d9cf9c' stroke-width='5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde:#4b5320; --verde-osc:#3d4a1f; --verde-2:#5f6b34; --verde-cl:#e7eadb; --fondo:#f4f5ef;
+  --caqui:#b5a26b; --caqui-cl:#efe9d4; --texto:#1f2418; --gris:#6b6f60; --borde:#d5d8c8;
+  --ok:#3f7a3a; --warn:#a86b12; --mal:#9b2c2c; --blanco:#fff;
+  --r:10px; --sombra:0 1px 3px rgba(0,0,0,.08);
+}
+*{box-sizing:border-box}
+html{font-size:10.5pt;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:'Noto Sans',system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.45;padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+a{color:var(--verde-osc)}
+h1,h2,h3{margin:.2em 0 .5em;line-height:1.25}
+h1{font-size:1.35rem} h2{font-size:1.15rem} h3{font-size:1rem}
+header.top{position:sticky;top:0;z-index:20;background:var(--verde-osc);color:#f3f1e4;padding:10px 14px calc(10px);display:flex;align-items:center;gap:10px;box-shadow:0 2px 4px rgba(0,0,0,.15)}
+header.top .logo{width:30px;height:30px;flex:none}
+header.top .tt{font-weight:700;font-size:1rem;line-height:1.1}
+header.top .st{font-size:.78rem;opacity:.85}
+header.top .sp{flex:1}
+#pomoBar{display:none;background:var(--caqui);color:#1f2418;padding:6px 14px;font-weight:600;font-size:.9rem;cursor:pointer;position:sticky;top:50px;z-index:19}
+main{max-width:860px;margin:0 auto;padding:12px}
+.card{background:var(--blanco);border:1px solid var(--borde);border-radius:var(--r);padding:12px 14px;margin:0 0 12px;box-shadow:var(--sombra)}
+.card.hl{border-left:5px solid var(--verde)}
+.card.warn{border-left:5px solid var(--warn);background:#fff8ec}
+.card.info{border-left:5px solid var(--caqui);background:var(--caqui-cl)}
+.grid{display:grid;gap:10px}
+.g2{grid-template-columns:1fr 1fr} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:520px){.g4{grid-template-columns:1fr 1fr}.g3.r{grid-template-columns:1fr}}
+.stat{background:var(--verde-cl);border-radius:8px;padding:8px 10px;text-align:center}
+.stat b{display:block;font-size:1.45rem;color:var(--verde-osc)}
+.stat span{font-size:.78rem;color:var(--gris)}
+.btn{appearance:none;border:1px solid var(--verde);background:var(--verde);color:#fff;border-radius:8px;padding:8px 12px;font:inherit;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none;min-height:38px}
+.btn.sec{background:#fff;color:var(--verde-osc)}
+.btn.sm{padding:4px 9px;min-height:30px;font-size:.88rem}
+.btn.peligro{background:var(--mal);border-color:var(--mal)}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.muted{color:var(--gris);font-size:.88rem}
+.small{font-size:.85rem}
+label{font-weight:600;font-size:.9rem;display:block;margin:6px 0 3px}
+input,select,textarea{font:inherit;width:100%;padding:7px 9px;border:1px solid var(--borde);border-radius:7px;background:#fff;color:var(--texto)}
+textarea{min-height:80px;resize:vertical}
+input[type=checkbox]{width:auto;transform:scale(1.25);accent-color:var(--verde)}
+.bar{height:9px;background:#e3e5d8;border-radius:5px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--verde);border-radius:5px}
+.tag{display:inline-block;font-size:.74rem;padding:1px 7px;border-radius:10px;background:var(--verde-cl);color:var(--verde-osc);font-weight:600}
+.tag.k{background:var(--caqui-cl);color:#6a5a26}
+.task{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--borde)}
+.task:last-child{border-bottom:0}
+.task .tx{flex:1}
+.task.done .tx{opacity:.55;text-decoration:line-through}
+.task .min{font-size:.8rem;color:var(--gris);white-space:nowrap}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:4px;vertical-align:middle}
+nav.tabs{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--borde);display:flex;z-index:30;padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs a{flex:1;text-align:center;padding:7px 2px 6px;text-decoration:none;color:var(--gris);font-size:.72rem;font-weight:600}
+nav.tabs a svg{display:block;margin:0 auto 2px;width:22px;height:22px}
+nav.tabs a.on{color:var(--verde-osc)}
+nav.tabs a.on svg{stroke:var(--verde-osc)}
+.seg{display:flex;border:1px solid var(--verde);border-radius:8px;overflow:hidden;flex-wrap:wrap}
+.seg button{flex:1;border:0;background:#fff;color:var(--verde-osc);padding:7px 4px;font:inherit;font-size:.85rem;font-weight:600;cursor:pointer;min-width:70px}
+.seg button.on{background:var(--verde);color:#fff}
+.st0{color:#8a8d80}.st1{color:#8a6d1c}.st2{color:#2f6a8a}.st3{color:var(--ok)}
+.unit{display:flex;gap:8px;align-items:center;padding:8px 2px;border-bottom:1px solid #eef0e6;cursor:pointer}
+.unit:hover{background:#fafbf6}
+.unit .nm{flex:1;font-size:.92rem}
+.pill{font-size:.72rem;border-radius:10px;padding:1px 8px;border:1px solid currentColor;white-space:nowrap;font-weight:600}
+details>summary{cursor:pointer;font-weight:700;padding:4px 0}
+.week{display:grid;gap:8px}
+.day{background:#fff;border:1px solid var(--borde);border-radius:8px;padding:8px 10px}
+.day.today{border:2px solid var(--verde)}
+.day h4{margin:0 0 4px;font-size:.92rem;display:flex;justify-content:space-between}
+.chart .r{display:grid;grid-template-columns:110px 1fr 52px;gap:6px;align-items:center;margin:5px 0;font-size:.84rem}
+.flash{min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:1.1rem;padding:18px;background:#fff;border:2px solid var(--verde-cl);border-radius:12px;white-space:pre-wrap}
+.timer{font-size:3.4rem;font-weight:700;text-align:center;color:var(--verde-osc);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.cornell{display:grid;grid-template-columns:34% 1fr;gap:8px}
+.cornell .sum{grid-column:1/3}
+.aviso{background:#fff3d6;border:1px solid #e5c67a;border-radius:8px;padding:8px 10px;font-size:.86rem}
+table.hab{border-collapse:collapse;width:100%;font-size:.85rem}
+table.hab th,table.hab td{border:1px solid var(--borde);padding:5px;text-align:center}
+table.hab td:first-child,table.hab th:first-child{text-align:left}
+.list li{margin:4px 0}
+.hide{display:none!important}
+.q{margin:10px 0 4px;font-weight:600;font-size:.93rem}
+.toast{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);background:#232a17;color:#fff;padding:9px 14px;border-radius:8px;z-index:50;font-size:.9rem;max-width:90%}
+.mas a.card{display:block;text-decoration:none;color:inherit}
+@media print{nav.tabs,header.top,#pomoBar{display:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="12" fill="#55632b"/><path d="M14 40l18-12 18 12M14 30l18-12 18 12" stroke="#d9cf9c" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div><div class="tt">Plan de Ascenso</div><div class="st">Promoción General 2026 · Cap. 1/o. Enfermera</div></div>
+  <div class="sp"></div>
+  <a href="#ajustes" style="color:#f3f1e4" aria-label="Ajustes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></a>
+</header>
+<div id="pomoBar" onclick="location.hash='#pomodoro'"></div>
+<main id="main"></main>
+<nav class="tabs" id="tabs">
+  <a href="#inicio" data-r="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+  <a href="#plan" data-r="plan"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Plan</a>
+  <a href="#temario" data-r="temario"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/><path d="M18 17l2 2 3-4"/></svg>Temario</a>
+  <a href="#practicar" data-r="practicar"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h12a2 2 0 0 1 2 2v12"/></svg>Practicar</a>
+  <a href="#pomodoro" data-r="pomodoro"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>Pomodoro</a>
+  <a href="#mas" data-r="mas"><svg viewBox="0 0 24 24" fill="none" stroke="#6b6f60" stroke-width="2"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>Más</a>
+</nav>
+<script>
+'use strict';
+/* ====== TEMARIO OFICIAL (Apéndice Promoción General 2026, Caps. 2/os., Capitán Segundo Enfermera) ======
+   Transcrito tal como aparece en la guía. [texto, peso estimado de carga] */
+const EXAMENES=[
+ {dia:'Día uno',examen:'Presentación'},{dia:'Día uno',examen:'Diagnóstico de Inglés'},
+ {dia:'Día dos',examen:'Legislación Militar'},{dia:'Día dos',examen:'Operaciones Militares'},
+ {dia:'Día dos',examen:'Derechos Humanos'},{dia:'Día dos',examen:'Aspecto Administrativo'},
+ {dia:'Día dos',examen:'Adiestramiento y Mando Militar'},{dia:'Día dos',examen:'Aspecto Técnico'},
+ {dia:'Día tres',examen:'Examen Médico'},{dia:'Día tres',examen:'Capacidad Física'}];
+const C='Completo.';
+const MATERIAS=[
+{id:'LM',nombre:'Legislación Militar',clave:'LM-04-2026',color:'#4b5320',libros:[
+ {n:1,nombre:'Código de Justicia Militar (Sin Penas).',ref:'D.O.F. 16-07-2025',corto:'el CJM',ley:1,grupos:[
+  {t:'Libro Segundo. Título Primero. De los delitos y de los responsables.',u:[['Capítulo I. Clasificación de delitos.',1],['Capítulo II. De las faltas.',1],['Capítulo III. Grados del delito intencional.',1],['Capítulo IV. Reincidencia y acumulación.',1],['Capítulo V. Autores.',1],['Capítulo VI. Cómplices.',1],['Capítulo VII. Encubridores.',1]]},
+  {t:'Libro Segundo. Título Segundo. De las penas y sus consecuencias.',u:[['Capítulo I. Reglas generales sobre las penas.',1],['Capítulo II. De la prisión.',1],['Capítulo III. De la suspensión de empleo o comisión.',1],['Capítulo IV. De la destitución de empleo.',1]]},
+  {t:'Libro Segundo. Título Sexto. Delitos contra la seguridad exterior de la nación.',u:[[C,2]]},
+  {t:'Libro Segundo. Título Séptimo. Delitos contra la seguridad interior de la nación.',u:[['Capítulo I. Rebelión.',1],['Capítulo II. Sedición.',1]]},
+  {t:'Libro Segundo. Título Octavo. Delitos contra la existencia y Sgd. de la Fza. Arm. Perm.',u:[[C,2]]},
+  {t:'Libro Segundo. Título Noveno. Delitos contra la jerarquía y la autoridad.',u:[['Capítulo I. Insubordinación.',1],['Capítulo II. Abuso de autoridad.',1],['Capítulo III. Desobediencia.',1]]},
+  {t:'Libro Segundo. Título Décimo. Delitos cometidos en ejercicio de las funciones militares o con motivo de ellas.',u:[[C,2]]},
+  {t:'Libro Segundo. Título Decimoprimero. Delitos contra el deber y decoro militares.',u:[['Capítulo I. Infracción de deberes comunes a todos los que están obligados a servir en la Fuerza Armada Permanente.',1],['Capítulo II. Infracción de los deberes de centinela, vigilante, serviola, tope y timonel.',1],['Capítulo V. Infracción de deberes militares correspondientes a cada militar según su comisión o empleo.',1],['Capítulo VII. Contra el honor militar.',1]]}]},
+ {n:2,nombre:'Ley Federal de Armas de Fuego y Explosivos.',ref:'D.O.F. 29-05-2025',corto:'la LFAFE',ley:1,grupos:[
+  {t:'Título Segundo. Posesión y Portación.',u:[[C,2]]}]},
+ {n:3,nombre:'Ley Orgánica del Ejército y Fuerza Aérea Mexicanos.',ref:'D.O.F. 16-07-2025',corto:'la Ley Orgánica del Ejército y F.A.M.',ley:1,grupos:[
+  {t:'Título Primero. Misiones generales.',u:[[C,2]]},
+  {t:'Título Segundo. Integración del Ejército y F.A.M.',u:[[C,2]]},
+  {t:'Título Cuarto. Composición del Ejército y F.A.M.',u:[['Capítulo I.',1],['Capítulo II. Composición del Ejército Mexicano.',1],['Capítulo III. Composición de la Fuerza Aérea Mexicana.',1],['Capítulo IV. Los servicios.',1],['Capítulo VI. Cuerpos de defensas rurales.',1],['Capítulo VII. Establecimientos de educación militar.',1]]},
+  {t:'Título Quinto. Personal del Ejército y F.A.M.',u:[['Capítulo I. Los grados.',1],['Capítulo II. Clases militares.',1],['Capítulo IV. Escalafones.',1]]}]},
+ {n:4,nombre:'Ley del Instituto de Seguridad Social para las Fuerzas Armadas Mexicanas.',ref:'D.O.F. 16-07-2025',corto:'la Ley del ISSFAM',ley:1,grupos:[
+  {t:'Título Segundo. De las prestaciones.',u:[['Capítulo Primero. Generalidades.',1],['Capítulo Segundo. Retiro, compensación y muerte del militar.',1.5],['Capítulo Tercero. Fondo de trabajo, fondo de ahorro, seguro de vida militar y seguro colectivo de retiro.',1.5],['Capítulo Sexto. Servicio médico integral.',1]]}]},
+ {n:5,nombre:'Ley de Disciplina del Ejército, Fuerza Aérea y Guardia Nacional (Sin transitorios).',ref:'D.O.F. 16-07-2025',corto:'la Ley de Disciplina',ley:1,grupos:[
+  {t:'Capítulo I. Disposiciones Generales.',u:[[C,1]]},
+  {t:'Capítulo II. Principios Generales de Disciplina Militar.',u:[[C,1]]},
+  {t:'Capítulo V. Prevenciones Generales.',u:[[C,1]]}]},
+ {n:6,nombre:'Ley de Ascensos y Recompensas del Ejto., F.A. y G.N.',ref:'D.O.F. 16-07-2025',corto:'la Ley de Ascensos y Recompensas',ley:1,grupos:[
+  {t:'Ley completa.',u:[[C,4]]}]},
+ {n:7,nombre:'Reglamento de la Ley de Ascensos y Recompensas del Ejto. y F.A.M.',ref:'D.O.F. 03-05-2023',corto:'el Reglamento de la Ley de Ascensos y Recompensas',ley:1,grupos:[
+  {t:'Título Segundo. De los Ascensos en Tiempos de Paz.',u:[[C,2]]}]},
+ {n:8,nombre:'Reglamento General de Deberes Militares.',ref:'D.O.F. 26-03-1937. Última reforma: D.O.F. 13-06-2024',corto:'el Reglamento General de Deberes Militares',ley:1,grupos:[
+  {t:'Título I. Deberes comunes a todos los militares.',u:[[C,2]]},
+  {t:'Título II. Deberes según la jerarquía.',u:[['Capítulo II. De los Oficiales. b) De los Capitanes.',1]]},
+  {t:'Título III. Deberes según el mando o cargo en los Cuerpos de Tropa.',u:[['Capítulo II. De los Oficiales. d) De los Capitanes Primeros y Segundos Cmtes. de Cía., Escuadrón o Batería.',1]]}]}]},
+{id:'OP',nombre:'Operaciones Militares',clave:'OP-02-2026',color:'#6d5f2c',libros:[
+ {n:1,nombre:'Manual de Logística Militar.',ref:'Edit. E.M.D.N., 2018 DN M 1459',corto:'el Manual de Logística Militar',grupos:[
+  {t:'Primera Parte. La Logística y los Servicios.',u:[[C,2]]},
+  {t:'Tercera Parte. Los Servicios del Ejército Mexicano.',u:[[C,2]]}]},
+ {n:2,nombre:'Manual de Operaciones Militares.',ref:'Edit. E.M.D.N., 2018 DN M 1455',corto:'el Manual de Operaciones Militares',grupos:[
+  {t:'Primera Parte. La Guerra.',u:[['Capítulo IV. El Arte Militar y Niveles de Conducción de las Operaciones.',1],['Capítulo V. Fases de la Guerra.',1],['Capítulo VI. Concepto de la Guerra en México.',1]]},
+  {t:'Segunda Parte. Organización de las Fuerzas Armadas en México.',u:[['Capítulo III. Organización del Ejército Mexicano.',1]]},
+  {t:'Tercera Parte. Operaciones.',u:[['Capítulo IV. La Maniobra.',1]]},
+  {t:'Cuarta Parte. Factores Concurrentes en las Operaciones.',u:[['Capítulo I. La Seguridad en las Operaciones.',1],['Capítulo II. El Terreno.',1]]},
+  {t:'Quinta Parte. La Táctica y las Armas.',u:[['Capítulo I. La Táctica.',1]]}]}]},
+{id:'DH',nombre:'Derechos Humanos',clave:'DH-02-2026',color:'#2f6a8a',libros:[
+ {n:1,nombre:'Ley Nacional Sobre el Uso de la Fuerza.',ref:'D.O.F. 24-01-2024',corto:'la Ley Nacional sobre el Uso de la Fuerza',ley:1,grupos:[
+  {t:'Ley completa.',u:[[C,3]]}]},
+ {n:2,nombre:'Manual de Derechos Humanos para el Ejército y Fuerza Aérea Mexicanos.',ref:'Edit. E.M.D.N., 2016 DN M 110',corto:'el Manual de Derechos Humanos',grupos:[
+  {t:'Capítulo II. Nociones Generales de Derechos Humanos.',u:[['Primera Sección. Definiciones.',1],['Segunda Sección. Características de los Derechos Humanos.',1]]},
+  {t:'Capítulo III. Los Derechos Humanos en la C.P.E.U.M.',u:[['Primera Sección. Disposiciones del Artículo 1°. Subsección D. Principios.',1],['Primera Sección. Disposiciones del Artículo 1°. Subsección E. Obligaciones del Estado.',1],['Primera Sección. Disposiciones del Artículo 1°. Subsección F. Deberes del Estado.',1]]},
+  {t:'Capítulo VIII. La Igualdad de Género en las Fuerzas Armadas.',u:[[C,1]]},
+  {t:'Capítulo IX. Fuerzas Armadas y Derechos Humanos.',u:[[C,1]]}]}]},
+{id:'AA',nombre:'Aspecto Administrativo',clave:'AA-04-2026',color:'#7a4e2d',libros:[
+ {n:1,nombre:'Manual de Aspectos Administrativos de Enfermería.',ref:'Edit. E.M.D.N., 2020 DN M 1106',corto:'el Manual de Aspectos Administrativos de Enfermería',grupos:[
+  {t:'Capítulo VI. Los Servicios de Enfermería.',u:[[C,1.5]]},
+  {t:'Capítulo VIII. Técnicas para el Cálculo de Personal y Material en los Servicios de Enfermería.',u:[[C,1.5]]},
+  {t:'Capítulo IX. La Evaluación y los Servicios de Enfermería.',u:[[C,1.5]]},
+  {t:'Capítulo X. Educación Continua en Enfermería.',u:[[C,1.5]]}]}]},
+{id:'AMM',nombre:'Adiestramiento y Mando Militar',clave:'AMM-03-2026',color:'#5a3d6b',libros:[
+ {n:1,nombre:'Manual de Mando y Liderazgo Militar (Formación de líderes).',ref:'Edit. E.M.C.D.N., 2024 DN14/I/PFA/S3/N4/F4/F3/0002',corto:'el Manual de Mando y Liderazgo Militar',grupos:[
+  {t:'Capítulo IV. La Comunicación Humana en el Ejercicio del Mando.',u:[[C,1]]},
+  {t:'Capítulo V. La Disciplina Militar en el Ejercicio del Mando.',u:[[C,1]]},
+  {t:'Capítulo VIII. Características de Mando y Liderazgo Militar.',u:[[C,1]]},
+  {t:'Capítulo IX. Principios de Mando y Liderazgo Militar.',u:[[C,1]]},
+  {t:'Capítulo X. El Mando como Orientador.',u:[[C,1]]}]},
+ {n:2,nombre:'Manual de Adiestramiento para el Ejército y Fuerza Aérea Mexicanos.',ref:'Edit. E.M.D.N., 2022 DN M 106',corto:'el Manual de Adiestramiento',grupos:[
+  {t:'Capítulo III. El Proceso del Adiestramiento.',u:[['Cuarta Sección. La Supervisión del Adiestramiento.',1]]},
+  {t:'Capítulo IV. Ejercicios Militares de Aplicación.',u:[[C,1]]}]}]},
+{id:'AT',nombre:'Aspecto Técnico',clave:'AT-04-2026',color:'#8a2f3c',libros:[
+ {n:1,nombre:'Manual de Aspectos Técnicos de Enfermería.',ref:'Edit. E.M.D.N., 2019 DN M 1103',corto:'el Manual de Aspectos Técnicos de Enfermería',grupos:[
+  {t:'Capítulo V. Atención de Enfermería a Pacientes con Enfermedades Visuales.',u:[[C,1.5]]},
+  {t:'Capítulo XI. Atención de Enfermería a Pacientes con Enfermedades del Sistema Digestivo.',u:[[C,1.5]]},
+  {t:'Capítulo XII. Atención de Enfermería a Pacientes con Enfermedades Genitourinarias.',u:[[C,1.5]]},
+  {t:'Capítulo XIV. Atención de Enfermería a Pacientes con Enfermedades Endócrinas, Nutricionales y Metabólicas.',u:[[C,1.5]]},
+  {t:'Capítulo XV. Atención de Enfermería a Pacientes con Enfermedades de la Piel.',u:[[C,1.5]]},
+  {t:'Capítulo XVI. Atención de Enfermería a Pacientes con Enfermedades Infecciosas y Parasitarias.',u:[[C,1.5]]},
+  {t:'Capítulo XX. Atención de Enfermería a Pacientes con Enfermedades Originadas en el Periodo Neonatal.',u:[[C,1.5]]},
+  {t:'Capítulo XXI. Atención de Enfermería a Pacientes con Enfermedades Congénitas.',u:[[C,1.5]]}]}]}
+];
+/* Aplanar a unidades */
+const UNITS=[];const UMAP={};const MMAP={};
+MATERIAS.forEach(m=>{MMAP[m.id]=m;m.units=[];m.peso=0;
+ m.libros.forEach(l=>{l.grupos.forEach((g,gi)=>{g.u.forEach((x,ui)=>{
+  const id=`${m.id}-${l.n}-${gi+1}-${ui+1}`;
+  const completo=x[0]===C;
+  const u={id,m:m.id,libro:l,grupo:g.t,titulo:x[0],w:x[1],completo,sinNombre:/^Cap[ií]tulo [IVXLC]+\.$/.test(x[0])};
+  u.tema=temaDe(u);u.nombre=completo?g.t:x[0];
+  UNITS.push(u);UMAP[id]=u;m.units.push(u);m.peso+=u.w;});});});});
+function limpia(t){let s=t;for(let i=0;i<3;i++)s=s.replace(/^(Libro|T[ií]tulo|Cap[ií]tulo|Primera|Segunda|Tercera|Cuarta|Quinta)\s[^.]*\.\s*/,'');if(/Art[ií]culo 1°/.test(s)){s=s.replace(/^Disposiciones del Art[ií]culo 1°\.\s*/,'').replace(/^Subsecci[oó]n \w\.\s*/,'').replace(/\.$/,'')+' (Artículo 1° de la C.P.E.U.M.)';}return s.replace(/\.$/,'').trim();}
+function temaDe(u){if(u.completo&&/^Ley completa/.test(u.grupo))return u.libro.nombre.replace(/\.$/,'');if(u.completo){const s=limpia(u.grupo);return s||u.libro.nombre.replace(/\.$/,'');}
+ const s=limpia(u.titulo);return s||limpia(u.grupo);}
+const ESTADOS=['No visto','Leído','Resumido','Dominado'];
+const DIAS=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const DIAS3=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const MESES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+
+/* Preguntas guía: generadas SOLO a partir de los títulos del temario. Sin respuestas. */
+function preguntas(u){
+ const L=u.libro, src=L.corto, t=u.tema;
+ const where=u.completo?u.grupo.replace(/\.$/,''):`${u.grupo.replace(/\.$/,'')} – ${u.titulo.replace(/\.$/,'')}`;
+ const q=[];
+ if(/^Ley completa/.test(u.grupo))q.push(`¿Qué regula ${src} y cómo está estructurada (títulos y capítulos)? Explícalo con tus propias palabras.`);
+ else q.push(`¿Qué establece ${src} en «${where}»? Explícalo con tus propias palabras.`);
+ q.push(`¿Cuáles son los conceptos, definiciones o clasificaciones clave que presenta el texto sobre «${t}»?`);
+ q.push(L.ley?`¿Qué artículos comprende esta parte y cuál es la idea central de cada uno?`:`¿Qué secciones o apartados comprende esta parte y cuál es la idea central de cada uno?`);
+ q.push(`¿Qué elementos, requisitos, sujetos, etapas o procedimientos menciona el texto respecto de «${t}»?`);
+ q.push(L.ley?`¿Qué obligaciones, prohibiciones o consecuencias señala el texto en esta parte?`:`¿Cómo aplicarías lo que establece el texto sobre «${t}» en tus funciones como Capitán Primero Enfermera?`);
+ q.push(`¿Con qué otras unidades del temario se relaciona «${t}»? ¿En qué se parecen y en qué se diferencian?`);
+ q.push(`Redacta 3 preguntas de opción múltiple sobre «${t}» y respóndelas consultando el texto oficial (${L.ref}).`);
+ return q;}
+/* ====== ESTADO (solo localStorage en este dispositivo) ====== */
+const KEY='planAscensoCap1.v1';
+const FECHA_PROBABLE='2027-04-01'; // fecha probable (abril 2027), editable en Configurar plan
+function nuevoEstado(){return{v:1,settings:null,units:{},cards:[],plan:null,logs:[],habits:{ingles:{},fisico:{}},activity:{},sims:[],pomo:{work:25,short:5,long:15,every:4,count:0},pomoRun:null};}
+let S=cargar();
+function cargar(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.v===1)return Object.assign(nuevoEstado(),x);}catch(e){}return nuevoEstado();}
+function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){toast('No se pudo guardar (almacenamiento lleno).');}}
+function U(id){if(!S.units[id])S.units[id]={st:0,ans:{},cornell:{c:'',n:'',s:''},feyn:'',mapa:''};return S.units[id];}
+function st(id){return S.units[id]?S.units[id].st:0;}
+
+/* ====== FECHAS ====== */
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parse=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c);};
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x;};
+const hoy=()=>ymd(new Date());
+const dow=d=>(d.getDay()+6)%7; // 0=Lunes
+const diffD=(a,b)=>Math.round((parse(b)-parse(a))/864e5);
+const fmt=s=>{const d=parse(s);return `${DIAS3[dow(d)]} ${d.getDate()} ${MESES[d.getMonth()]}`;};
+const fmtL=s=>{const d=parse(s);return `${DIAS[dow(d)]} ${d.getDate()} de ${['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]} de ${d.getFullYear()}`;};
+function marcaActividad(){S.activity[hoy()]=true;}
+function racha(){let d=new Date();if(!S.activity[ymd(d)])d=addD(d,-1);let n=0;while(S.activity[ymd(d)]){n++;d=addD(d,-1);}return n;}
+
+/* ====== UTILIDADES UI ====== */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600);}
+const pct=(a,b)=>b?Math.round(a*100/b):0;
+function progMateria(m){let s=0;m.units.forEach(u=>s+=st(u.id)/3*u.w);return pct(s,m.peso);}
+function progGlobal(){let s=0,t=0;UNITS.forEach(u=>{s+=st(u.id)/3*u.w;t+=u.w;});return pct(s,t);}
+const barra=(p,c)=>`<div class="bar"><i style="width:${p}%;${c?'background:'+c:''}"></i></div>`;
+const tagM=id=>{const m=MMAP[id];return m?`<span class="tag" style="background:${m.color}1f;color:${m.color}">${esc(m.nombre)}</span>`:'';};
+
+/* ====== GENERADOR DEL PLAN ======
+   - Reparte todas las unidades pendientes de forma proporcional a su carga estimada (Legislación es la más pesada).
+   - Intercala materias (interleaving) con un reparto tipo "stride" para que cada materia aparezca a lo largo de todo el periodo.
+   - Bloque diario de tarjetas (repaso espaciado), mini-simulacro acumulativo semanal y bloque final de repaso general (2 semanas). */
+function generarPlan(desde){
+ const s=S.settings;const examen=s.dia1;const inicio=desde||s.inicio;
+ const last=addD(parse(examen),-1);const d0=parse(inicio);
+ const keep={};
+ if(S.plan&&desde){Object.keys(S.plan.days).forEach(k=>{if(k<desde)keep[k]=S.plan.days[k];});}
+ const days=[];for(let d=new Date(d0);d<=last;d=addD(d,1))days.push(ymd(d));
+ const avisos=[];
+ if(!days.length){return{error:'La fecha de inicio debe ser anterior a la fecha del examen (Día uno).'};}
+ const N=days.length;
+ const R=N>=56?s.repaso:Math.min(s.repaso,Math.max(2,Math.round(N*0.2)));
+ if(R<s.repaso)avisos.push(`Quedan ${N} días: el bloque de repaso general se redujo a ${R} días.`);
+ const restD=N-R;let f1,f2,f3;
+ if(restD>=70){f1=Math.round(restD*0.6);f2=Math.round(restD*0.25);f3=restD-f1-f2;}
+ else if(restD>=35){f1=Math.round(restD*0.7);f2=restD-f1;f3=0;}
+ else{f1=restD;f2=0;f3=0;if(restD>0)avisos.push('Con el tiempo disponible el plan se concentra en una sola vuelta al temario más el repaso final.');}
+ const D1=days.slice(0,f1),D2=days.slice(f1,f1+f2),D3=days.slice(f1+f2,restD),DR=days.slice(restD);
+ const fases=[];const addF=(n,arr,desc)=>{if(arr.length)fases.push({n,desc,ini:arr[0],fin:arr[arr.length-1]});};
+ addF('Fase 1 · Primera vuelta',D1,'Lectura activa de todo el temario, notas Cornell y primeras tarjetas.');
+ addF('Fase 2 · Profundización',D2,'Segunda vuelta: Feynman, preguntas guía sin ver y más tarjetas.');
+ addF('Fase 3 · Práctica de examen',D3,'Simulacros por materia y refuerzo de unidades débiles.');
+ addF('Fase 4 · Repaso general',DR,'Repaso final intercalado de todas las materias y simulacros generales.');
+ const out={};const av=k=>+s.min[dow(parse(k))]||0;
+ // plantilla diaria (tarjetas + mini-simulacro semanal) para fases 1 y 2
+ const plantilla={};
+ [...D1,...D2].forEach((k,i)=>{const a=av(k);const arr=[];let rest=a;
+  if(a>0){if(a>=40){arr.push({t:'cards',min:10});rest-=10;}
+   if(dow(parse(k))===+s.simDia&&i>=3){const m=Math.min(45,Math.max(20,Math.round(a*0.4)));arr.push({t:'sim',min:m});rest-=m;}}
+  plantilla[k]={arr,rest:Math.max(0,rest)};});
+ const stride=(partes)=>{const colas={},totM={},pass={};
+  MATERIAS.forEach((m,i)=>{colas[m.id]=partes.filter(x=>UMAP[x.u].m===m.id);totM[m.id]=colas[m.id].reduce((a,b)=>a+b.min,0)||1;pass[m.id]=i*0.001;});
+  const orden=[];let prev=null;
+  while(MATERIAS.some(m=>colas[m.id].length)){const cand=MATERIAS.filter(m=>colas[m.id].length).sort((a,b)=>pass[a.id]-pass[b.id]);
+   let m=cand[0];if(cand.length>1&&m.id===prev&&pass[cand[1].id]-pass[m.id]<0.02)m=cand[1];
+   const it=colas[m.id].shift();orden.push(it);pass[m.id]+=it.min/totM[m.id]+0.0001;prev=m.id;}
+  return orden;};
+ const hacerPartes=(items,T,f,tipo,maxP)=>{const W=items.reduce((a,x)=>a+x.w,0)||1;const partes=[];
+  items.forEach(it=>{const min=Math.max(15,Math.round(T*f*it.w/W/5)*5);const k=Math.max(1,Math.ceil(min/maxP));const b=Math.round(min/k/5)*5||min;
+   for(let i=0;i<k;i++)partes.push({t:tipo,u:it.u.id,min:i===k-1?Math.max(10,min-b*(k-1)):b});});
+  return stride(partes);};
+ // llena días en orden; no deja fragmentos menores a 15 min
+ const llenarDias=(keys,capOf,partes)=>{const q=partes.map(p=>Object.assign({},p));const o={};
+  keys.forEach(k=>{let cap=capOf(k);const tasks=[];
+   while(q.length&&cap>=15&&tasks.length<4){const p=q[0];
+    if(p.min<=cap){tasks.push(Object.assign({},p));cap-=p.min;q.shift();}
+    else if(cap>=20&&p.min-cap>=15){tasks.push(Object.assign({},p,{min:cap}));p.min-=cap;cap=0;}
+    else break;}
+   o[k]=tasks;});
+  return{o,left:q};};
+ const ajustar=(keys,capOf,items,tipo,maxP,previas)=>{const T=keys.reduce((a,k)=>a+capOf(k),0)-previas.reduce((a,b)=>a+b.min,0);
+  let r=null;for(let f=0.95;f>=0.45;f-=0.05){const partes=previas.concat(hacerPartes(items,Math.max(0,T),f,tipo,maxP));r=llenarDias(keys,capOf,partes);if(!r.left.length)break;}
+  if(!items.length)r=llenarDias(keys,capOf,previas);
+  return r;};
+ // FASE 1: primera vuelta (unidades no resumidas; las ya leídas pesan la mitad)
+ const it1=UNITS.filter(u=>st(u.id)<2).map(u=>({u,w:u.w*(st(u.id)===1?0.5:1)}));
+ const cap12=k=>plantilla[k]?plantilla[k].rest:0;
+ const T1=D1.reduce((a,k)=>a+cap12(k),0);
+ if(it1.length&&T1<it1.length*25)avisos.push(`El tiempo de la primera vuelta es justo: ~${Math.round(T1/Math.max(1,it1.length))} min por unidad. Considera aumentar minutos diarios.`);
+ const r1=ajustar(D1,cap12,it1,'study',45,[]);
+ // FASE 2: profundización (unidades no dominadas); primero lo pendiente de la fase 1
+ const it2=UNITS.filter(u=>st(u.id)<3).map(u=>({u,w:u.w}));
+ const r2=D2.length?ajustar(D2,cap12,it2,'deep',40,r1.left):{o:{},left:r1.left};
+ // FASE 3: práctica de examen
+ const seqM=(n)=>{const acc={};MATERIAS.forEach(m=>acc[m.id]=0);const tot=MATERIAS.reduce((a,m)=>a+m.peso,0);const sq=[];
+  for(let i=0;i<n;i++){let best=null;MATERIAS.forEach(m=>{acc[m.id]+=m.peso;if(!best||acc[m.id]>acc[best])best=m.id;});acc[best]-=tot;sq.push(best);}return sq;};
+ const seq=seqM((D3.length+DR.length)*3+12);let si=0;const sig=(evita)=>{let a=seq[si++%seq.length];if(a===evita)a=seq[si++%seq.length];return a;};
+ let pendientes=r2.left.filter(t=>t.t==='study');
+ if(r2.left.length>pendientes.length)avisos.push('No cupieron todos los bloques de profundización; prioriza las unidades más débiles durante la práctica de examen.');
+ const capPend=k=>Math.max(0,av(k)-(av(k)>=40?10:0));
+ D1.concat(D2).forEach(k=>{const p=plantilla[k];const tasks=(r1.o[k]||[]).concat(r2.o[k]||[]);
+  out[k]=[...p.arr.filter(x=>x.t==='cards'),...tasks,...p.arr.filter(x=>x.t==='sim')];if(!out[k].length)out[k]=[{t:'rest',min:0}];});
+ const pendienteDia=(k)=>{if(!pendientes.length)return null;const r=llenarDias([k],capPend,pendientes);pendientes=r.left;return r.o[k];};
+ D3.forEach(k=>{const a=av(k);if(!a){out[k]=[{t:'rest',min:0}];return;}const arr=[];if(a>=40)arr.push({t:'cards',min:10});
+  const pend=pendienteDia(k);if(pend&&pend.length){out[k]=arr.concat(pend);return;}
+  let r=a-(a>=40?10:0);
+  if(dow(parse(k))===+s.simDia){arr.push({t:'simg',min:Math.min(r,90)});}
+  else{const m1=sig(),m2=sig(m1);if(r>=50){const h=Math.round(r/2/5)*5;arr.push({t:'simm',m:m1,min:h},{t:'rev',m:m2,min:r-h});}else arr.push({t:'simm',m:m1,min:r});}
+  out[k]=arr;});
+ // FASE 4: repaso general
+ DR.forEach((k,i)=>{const a=av(k);const arr=[];
+  if(!a){out[k]=[{t:'rest',min:0}];return;}
+  const pend=pendienteDia(k);if(pend&&pend.length){out[k]=[{t:'cards',min:Math.min(10,a)}].concat(pend);return;}
+  if(i===DR.length-1){out[k]=[{t:'final',min:Math.min(a,30)}];return;}
+  const n=DR.length-1;const esSim=(i%3===2)||(i===n-1&&n>=2);
+  if(a>=40)arr.push({t:'cards',min:10});let r=a-(a>=40?10:0);
+  if(esSim)arr.push({t:'simg',min:r});
+  else{const m1=sig(),m2=sig(m1);if(r>=50&&m2!==m1){const h=Math.round(r/2/5)*5;arr.push({t:'rev',m:m1,min:h},{t:'rev',m:m2,min:r-h});}else arr.push({t:'rev',m:m1,min:r});}
+  out[k]=arr;});
+ if(pendientes.length)avisos.push('No alcanzó el tiempo para asignar todas las unidades antes del examen. Aumenta los minutos diarios o adelanta la fecha de inicio.');
+ // numerar partes por unidad y tipo
+ const cuenta={},idx={};const ks=Object.keys(out).sort();
+ ks.forEach(k=>out[k].forEach(t=>{if(t.u){const c=t.t+t.u;cuenta[c]=(cuenta[c]||0)+1;}}));
+ ks.forEach(k=>out[k].forEach(t=>{if(t.u){const c=t.t+t.u;idx[c]=(idx[c]||0)+1;t.p=idx[c];t.n=cuenta[c];}}));
+ const e1=s.dia1,e2=s.dia2||ymd(addD(parse(s.dia1),1)),e3=s.dia3||ymd(addD(parse(s.dia1),2));
+ out[e1]=[{t:'exam',txt:'Día uno: Presentación y Diagnóstico de Inglés'}];
+ out[e2]=[{t:'exam',txt:'Día dos: Legislación Militar, Operaciones Militares, Derechos Humanos, Aspecto Administrativo, Adiestramiento y Mando Militar, Aspecto Técnico'}];
+ out[e3]=[{t:'exam',txt:'Día tres: Examen Médico y Capacidad Física'}];
+ let c=0;Object.keys(out).forEach(k=>out[k].forEach(t=>t.id='t'+(++c)+'_'+k.replace(/-/g,'')));
+ return{plan:{creado:new Date().toISOString(),desde:inicio,inicioRepaso:DR[0]||null,fases,days:Object.assign({},keep,out)},avisos};}
+function faseDe(k){if(!S.plan||!S.plan.fases)return null;return S.plan.fases.find(f=>k>=f.ini&&k<=f.fin)||null;}
+function textoTarea(t){
+ switch(t.t){
+  case 'study':{const u=UMAP[t.u];if(!u)return'Unidad';const m=MMAP[u.m];
+   let tec;if(t.n===1)tec='Lectura activa → Cornell → explícalo (Feynman) → crea tarjetas';
+   else if(t.p===1)tec='Lectura activa y preguntas guía';
+   else if(t.p===t.n)tec='Termina, resume en Cornell, Feynman y crea tarjetas';
+   else tec='Continúa lectura activa; responde preguntas guía';
+   return `<b>${esc(u.libro.nombre.replace(/\.$/,''))}</b> · ${esc(u.completo?u.grupo:u.grupo+' '+u.titulo)}${t.n>1?` <span class="tag k">parte ${t.p}/${t.n}</span>`:''}<br><span class="muted">${tec}</span>`;}
+  case 'deep':{const u=UMAP[t.u];if(!u)return'Unidad';
+   return `<b>Profundización:</b> ${esc(u.libro.nombre.replace(/\.$/,''))} · ${esc(u.completo?u.grupo:u.grupo+' '+u.titulo)}${t.n>1?` <span class="tag k">parte ${t.p}/${t.n}</span>`:''}<br><span class="muted">Responde las preguntas guía sin ver, explícala (Feynman), verifica y crea o mejora tarjetas</span>`;}
+  case 'simm':return `<b>Simulacro de ${esc(MMAP[t.m].nombre)}</b><br><span class="muted">Preguntas guía al azar de esta materia; anota y refuerza las unidades falladas</span>`;
+  case 'cards':return '<b>Repaso espaciado</b>: tarjetas pendientes de hoy';
+  case 'sim':return '<b>Mini-simulacro acumulativo semanal</b><br><span class="muted">Preguntas guía al azar de todo lo visto; responde sin ver el manual y luego verifica</span>';
+  case 'simg':return '<b>Simulacro general</b> (todas las materias, mezcladas)<br><span class="muted">Práctica de examen con preguntas guía y tarjetas; anota tus fallos</span>';
+  case 'rev':return `<b>Repaso general: ${esc(MMAP[t.m].nombre)}</b><br><span class="muted">Recorre las preguntas guía de todas sus unidades; prioriza las que no están en «Dominado»</span>`;
+  case 'final':return '<b>Repaso ligero y descanso</b><br><span class="muted">Solo tarjetas y tus resúmenes; duerme bien y prepara lo necesario para el Día uno</span>';
+  case 'rest':return '<span class="muted">Descanso (0 min configurados)</span>';
+  case 'exam':return `<b>🎖️ ${esc(t.txt)}</b>`;}
+ return '';}
+function materiaTarea(t){if(t.u)return UMAP[t.u]&&UMAP[t.u].m;if(t.m)return t.m;return null;}
+function tareasDe(k){return(S.plan&&S.plan.days[k])||[];}
+function atrasadas(){if(!S.plan)return[];const h=hoy();const r=[];Object.keys(S.plan.days).forEach(k=>{if(k>=h)return;S.plan.days[k].forEach(t=>{if(!t.done&&((t.t==='study'&&st(t.u)===0)||(t.t==='deep'&&st(t.u)<2)))r.push(t);});});return r;}
+function toggleTarea(k,id,el){const t=tareasDe(k).find(x=>x.id===id);if(!t)return;t.done=el.checked;
+ if(t.done){marcaActividad();if(t.t==='study'&&t.p===t.n){const x=U(t.u);if(x.st<1){x.st=1;toast('Unidad marcada como «Leído». Actualiza su estado en Temario cuando la resumas o domines.');}}}
+ guardar();render();}
+function filaTarea(k,t,ctrl=true){
+ const m=materiaTarea(t);const c=m?MMAP[m].color:'#b5a26b';
+ const btn=(t.t==='study'||t.t==='deep')?` <a class="btn sm sec" href="#unidad/${t.u}">Abrir</a>`:t.t==='cards'?` <a class="btn sm sec" href="#practicar">Repasar</a>`:(t.t==='sim'||t.t==='simg'||t.t==='simm')?` <a class="btn sm sec" href="#practicar/sim">Iniciar</a>`:t.t==='rev'?` <a class="btn sm sec" href="#temario/${t.m}">Ver</a>`:'';
+ const chk=ctrl&&!['rest','exam'].includes(t.t)?`<input type="checkbox" ${t.done?'checked':''} onchange="toggleTarea('${k}','${t.id}',this)" aria-label="Hecho">`:`<span style="width:18px"></span>`;
+ return `<div class="task ${t.done?'done':''}">${chk}<span class="dot" style="background:${c};margin-top:6px"></span><div class="tx">${textoTarea(t)}${btn}</div>${t.min?`<span class="min">${t.min} min</span>`:''}</div>`;}
+/* ====== VISTAS ====== */
+const V={};
+function render(){const h=(location.hash||'#inicio').slice(1);const[r,...a]=h.split('/');
+ const f=V[r]||V.inicio;const main=$('#main');main.innerHTML=f(...a.map(decodeURIComponent));
+ const tab={inicio:'inicio',setup:'inicio',plan:'plan',temario:'temario',unidad:'temario',practicar:'practicar',pomodoro:'pomodoro'}[r]||'mas';
+ document.querySelectorAll('nav.tabs a').forEach(x=>x.classList.toggle('on',x.dataset.r===tab));
+ if(V['_after_'+r])V['_after_'+r](...a);}
+window.addEventListener('hashchange',()=>{render();window.scrollTo(0,0);});
+
+V.inicio=()=>{
+ if(!S.settings)return `<div class="card hl"><h1>¡Bienvenida, Capitán!</h1><p>Esta app es tu tutor para la <b>Promoción General 2026</b> rumbo a <b>Capitán Primero Enfermera</b>. Contiene el temario oficial completo (apéndice Cap. 2/o. Enfermera) y te arma un calendario semanal con técnicas de estudio probadas.</p><p class="muted">Tus datos se guardan solo en este dispositivo. Nada se envía a internet.</p><a class="btn" href="#setup">Configurar mi plan</a></div>`+resumenTemario();
+ const h=hoy();const dl=diffD(h,S.settings.dia1);const due=cartasPendientes().length;
+ const tareas=tareasDe(h);const atr=atrasadas();
+ const minM={};S.logs.forEach(l=>{minM[l.m]=(minM[l.m]||0)+l.min;});const maxM=Math.max(60,...Object.values(minM));
+ const totH=(Object.values(minM).reduce((a,b)=>a+b,0)/60).toFixed(1);
+ let x=`<div class="grid g4" style="margin-bottom:12px">
+  <div class="stat"><b>${dl>=0?dl:0}</b><span>días para el examen${S.settings.dia1===FECHA_PROBABLE?' (fecha probable)':''}</span></div>
+  <div class="stat"><b>${progGlobal()}%</b><span>avance del temario</span></div>
+  <div class="stat"><b>${due}</b><span>tarjetas para hoy</span></div>
+  <div class="stat"><b>${racha()}🔥</b><span>días de racha</span></div></div>`;
+ if(dl<0)x+=`<div class="card info">La fecha del Día uno (${fmt(S.settings.dia1)}) ya pasó. Si hay nueva fecha, actualízala en <a href="#setup">Configurar plan</a>.</div>`;
+ if(atr.length)x+=`<div class="card warn"><b>Vas ${atr.length} bloque(s) atrasada.</b> No pasa nada: recalcula y la app redistribuye lo pendiente desde hoy.<div class="row" style="margin-top:8px"><button class="btn" onclick="recalcular()">Recalcular desde hoy</button></div></div>`;
+ const fz=faseDe(h);if(fz)x+=`<div class="card info small"><b>${esc(fz.n)}</b> · hasta el ${fmt(fz.fin)}<br>${esc(fz.desc)}</div>`;
+ x+=`<div class="card hl"><h2>Hoy · ${fmt(h)}</h2>${tareas.length?tareas.map(t=>filaTarea(h,t)).join(''):'<p class="muted">Sin tareas programadas para hoy.</p>'}
+  <div class="row" style="margin-top:8px"><a class="btn" href="#pomodoro">▶ Iniciar Pomodoro</a>${due?`<a class="btn sec" href="#practicar">Repasar ${due} tarjeta(s)</a>`:''}</div></div>`;
+ x+=`<div class="card"><h2>Hábitos de hoy</h2><div class="row"><label class="row" style="font-weight:400"><input type="checkbox" ${S.habits.ingles[h]?'checked':''} onchange="habIngles(this.checked)"> Inglés 10–15 min</label> <a class="small" href="#ingles">ideas</a></div>
+  <div class="row"><label class="row" style="font-weight:400"><input type="checkbox" ${S.habits.fisico[h]&&Object.values(S.habits.fisico[h]).some(Boolean)?'checked':''} onchange="habFisicoRapido(this.checked)"> Actividad física</label> <a class="small" href="#fisico">registro semanal</a></div></div>`;
+ x+=`<div class="card"><h2>Avance por materia</h2>${MATERIAS.map(m=>`<div style="margin:7px 0"><div class="row" style="justify-content:space-between"><a href="#temario/${m.id}" class="small" style="font-weight:600;text-decoration:none;color:${m.color}">${esc(m.nombre)}</a><span class="small">${progMateria(m)}%</span></div>${barra(progMateria(m),m.color)}</div>`).join('')}
+  <div style="margin-top:10px"><div class="row" style="justify-content:space-between"><b class="small">Global</b><span class="small">${progGlobal()}%</span></div>${barra(progGlobal())}</div></div>`;
+ x+=`<div class="card"><h2>Horas estudiadas por materia <span class="muted">(${totH} h en total)</span></h2><div class="chart">${MATERIAS.map(m=>{const v=minM[m.id]||0;return `<div class="r"><span>${esc(m.id)} · ${esc(m.nombre.split(' ')[0])}</span><div class="bar" style="height:14px"><i style="width:${pct(v,maxM)}%;background:${m.color}"></i></div><span>${(v/60).toFixed(1)} h</span></div>`;}).join('')}
+  ${(minM.ING||minM.GEN)?`<div class="r"><span>Inglés / otros</span><div class="bar" style="height:14px"><i style="width:${pct((minM.ING||0)+(minM.GEN||0),maxM)}%;background:#b5a26b"></i></div><span>${(((minM.ING||0)+(minM.GEN||0))/60).toFixed(1)} h</span></div>`:''}</div>
+  <p class="muted">Se registra con el Pomodoro o con «Registrar tiempo manual» en la pantalla Pomodoro.</p></div>`;
+ x+=`<div class="card"><h2>Respaldo</h2><p class="muted">Tus datos viven solo en este dispositivo. Exporta un respaldo de vez en cuando.</p><div class="row"><button class="btn sec" onclick="exportar()">⬇ Exportar respaldo (JSON)</button><label class="btn sec" style="margin:0">⬆ Importar<input type="file" accept="application/json,.json" class="hide" onchange="importar(this)"></label></div></div>`;
+ return x;};
+function habIngles(v){S.habits.ingles[hoy()]=v;if(v)marcaActividad();guardar();}
+function habFisicoRapido(v){const h=hoy();S.habits.fisico[h]=S.habits.fisico[h]||{};S.habits.fisico[h].otro=v;guardar();}
+function resumenTemario(){return `<div class="card"><h2>Exámenes de la promoción</h2><table class="hab"><tr><th>Día</th><th>Examen</th></tr>${EXAMENES.map(e=>`<tr><td>${e.dia}</td><td>${e.examen}</td></tr>`).join('')}</table><p class="muted">Temario: ${UNITS.length} unidades en ${MATERIAS.length} materias escritas.</p></div>`;}
+
+/* ---- Configuración ---- */
+V.setup=()=>{const s=S.settings||{inicio:hoy(),dia1:FECHA_PROBABLE,dia2:'',dia3:'',min:[60,60,60,60,60,120,90],repaso:21,simDia:6};
+ return `<div class="card hl"><h1>Configurar mi plan</h1>
+ <p class="muted">Viene precargada una fecha probable; ajústala cuando se publique la oficial. Puedes cambiarla después y recalcular.</p>
+ <div class="grid g2"><div><label for="fIni">Fecha de inicio</label><input type="date" id="fIni" value="${s.inicio}"></div>
+ <div><label for="fD1">Fecha del examen (Día uno) – <span class="tag k">fecha probable</span></label><input type="date" id="fD1" value="${s.dia1}"><span class="muted">Fecha probable: abril de 2027 (día exacto por confirmar). Cámbiala cuando se publique la fecha oficial y recalcula.</span></div>
+ <div><label for="fD2">Día dos (exámenes escritos)</label><input type="date" id="fD2" value="${s.dia2||''}"><span class="muted">Si lo dejas vacío: día siguiente al Día uno.</span></div>
+ <div><label for="fD3">Día tres (médico y físico)</label><input type="date" id="fD3" value="${s.dia3||''}"><span class="muted">Si lo dejas vacío: dos días después del Día uno.</span></div></div>
+ <h3 style="margin-top:14px">Minutos disponibles para estudiar</h3>
+ <div class="grid g2"><div><label for="fLV">Lunes a viernes</label><input type="number" min="0" max="600" step="5" id="fLV" value="${s.min[0]}"></div><div><label for="fSD">Sábado y domingo</label><input type="number" min="0" max="600" step="5" id="fSD" value="${s.min[5]}"></div></div>
+ <button class="btn sm sec" style="margin-top:6px" onclick="aplicarMin()">Aplicar a cada día ↓</button>
+ <div class="grid g4" style="margin-top:6px">${DIAS.map((d,i)=>`<div><label for="fm${i}">${d}</label><input type="number" min="0" max="600" step="5" id="fm${i}" value="${s.min[i]}"></div>`).join('')}</div>
+ <div class="grid g2" style="margin-top:6px"><div><label for="fRep">Días de repaso general final</label><input type="number" id="fRep" min="2" max="30" value="${s.repaso}"></div>
+ <div><label for="fSim">Día del mini-simulacro semanal</label><select id="fSim">${DIAS.map((d,i)=>`<option value="${i}" ${+s.simDia===i?'selected':''}>${d}</option>`).join('')}</select></div></div>
+ <div class="row" style="margin-top:12px"><button class="btn" onclick="guardarSetup()">Generar plan</button>${S.settings?'<a class="btn sec" href="#inicio">Cancelar</a>':''}</div>
+ <p class="muted" style="margin-top:8px">La distribución pondera la carga estimada de cada unidad (Legislación Militar es la más pesada), intercala materias, reserva 10 min diarios para tarjetas y un mini-simulacro semanal. Con tiempo suficiente se organiza en fases: <b>1) Primera vuelta</b> (lectura activa y Cornell, ~60%), <b>2) Profundización</b> (Feynman, preguntas guía y tarjetas, ~25%), <b>3) Práctica de examen</b> (simulacros por materia, ~15%) y <b>4) Repaso general</b> (últimos ${s.repaso} días).</p></div>`;};
+function aplicarMin(){const a=$('#fLV').value,b=$('#fSD').value;for(let i=0;i<5;i++)$('#fm'+i).value=a;$('#fm5').value=b;$('#fm6').value=b;}
+function guardarSetup(){
+ const s={inicio:$('#fIni').value,dia1:$('#fD1').value,dia2:$('#fD2').value,dia3:$('#fD3').value,min:DIAS.map((_,i)=>Math.max(0,+$('#fm'+i).value||0)),repaso:Math.max(2,+$('#fRep').value||14),simDia:+$('#fSim').value};
+ if(!s.inicio||!s.dia1){toast('Captura la fecha de inicio y la del Día uno.');return;}
+ if(s.dia1<=s.inicio){toast('El examen debe ser después de la fecha de inicio.');return;}
+ if(!s.min.some(x=>x>0)){toast('Asigna minutos al menos a un día.');return;}
+ const prev=S.settings;S.settings=s;const r=generarPlan();
+ if(r.error){S.settings=prev;toast(r.error);return;}
+ S.plan=r.plan;S.plan.avisos=r.avisos;guardar();location.hash='#plan';toast('Plan generado ✔');}
+function recalcular(){if(!S.settings)return;const desde=hoy()>S.settings.inicio?hoy():S.settings.inicio;const r=generarPlan(desde);if(r.error){toast(r.error);return;}S.plan=r.plan;S.plan.avisos=r.avisos;guardar();render();toast('Plan recalculado desde hoy ✔');}
+
+/* ---- Plan semanal ---- */
+let semOff=null;
+V.plan=()=>{if(!S.plan)return `<div class="card">Aún no tienes plan. <a href="#setup">Configúralo aquí</a>.</div>`;
+ const h=hoy();const keys=Object.keys(S.plan.days).sort();const first=parse(keys[0]);
+ const lunes0=addD(first,-dow(first));
+ const nSem=Math.ceil((diffD(ymd(lunes0),keys[keys.length-1])+1)/7);
+ if(semOff===null){semOff=Math.max(0,Math.min(nSem-1,Math.floor(diffD(ymd(lunes0),h)/7)));}
+ const lun=addD(lunes0,semOff*7);
+ let tot=0,hech=0;
+ let x=`<div class="card hl"><div class="row" style="justify-content:space-between"><h1 style="margin:0">Semana ${semOff+1} de ${nSem}</h1><span class="muted">${fmt(ymd(lun))} – ${fmt(ymd(addD(lun,6)))}</span></div>
+ <div class="row" style="margin-top:8px"><button class="btn sm sec" ${semOff<=0?'disabled':''} onclick="semOff--;render()">◀ Anterior</button><button class="btn sm sec" onclick="semOff=null;render()">Hoy</button><button class="btn sm sec" ${semOff>=nSem-1?'disabled':''} onclick="semOff++;render()">Siguiente ▶</button>
+ <span class="sp" style="flex:1"></span><button class="btn sm sec" onclick="recalcular()">↻ Recalcular</button><a class="btn sm sec" href="#setup">Ajustes del plan</a></div>
+ ${(S.plan.fases||[]).length?`<details style="margin-top:8px"><summary class="small">Fases del plan · Día uno: ${fmt(S.settings.dia1)}</summary>${S.plan.fases.map(f=>`<div class="small" style="margin:4px 0"><b>${esc(f.n)}</b> (${fmt(f.ini)} – ${fmt(f.fin)}): ${esc(f.desc)}</div>`).join('')}</details>`:''}
+ ${(S.plan.avisos||[]).map(a=>`<div class="aviso" style="margin-top:6px">${esc(a)}</div>`).join('')}</div><div class="week">`;
+ for(let i=0;i<7;i++){const k=ymd(addD(lun,i));const ts=tareasDe(k);ts.forEach(t=>{if(!['rest','exam'].includes(t.t)){tot++;if(t.done)hech++;}});
+  const mins=ts.reduce((a,t)=>a+(t.min||0),0);
+  const fz=faseDe(k);const fase=fz?`<span class="tag k">${esc(fz.n.split(' · ')[1])}</span>`:'';
+  x+=`<div class="day ${k===h?'today':''}"><h4><span>${fmt(k)} ${k===h?'<span class="tag">hoy</span>':''} ${fase}</span><span class="muted">${mins?mins+' min':''}</span></h4>${ts.length?ts.map(t=>filaTarea(k,t)).join(''):'<span class="muted small">—</span>'}</div>`;}
+ x+=`</div><div class="card" style="margin-top:12px"><b>Cumplimiento de la semana:</b> ${hech}/${tot} ${barra(pct(hech,tot))}<div class="row" style="margin-top:10px"><button class="btn sm sec" onclick="exportarICS()">📅 Exportar plan a calendario (.ics)</button></div><p class="muted">El archivo .ics se importa en Google Calendar (Configuración → Importar y exportar) para recibir recordatorios.</p></div>`;
+ return x;};
+
+/* ---- Temario ---- */
+V.temario=(mid)=>{
+ const ms=mid&&MMAP[mid]?[MMAP[mid]]:MATERIAS;
+ let x=`<div class="card hl"><h1>Temario oficial</h1><p class="muted">Apéndice Promoción General 2026 (Caps. 2/os.) · Capitán Segundo Enfermera. Estado por unidad: <span class="st0">No visto</span> · <span class="st1">Leído</span> · <span class="st2">Resumido</span> · <span class="st3">Dominado</span>.</p>
+ <div class="row">${MATERIAS.map(m=>`<a class="btn sm ${mid===m.id?'':'sec'}" href="#temario/${m.id}">${m.id}</a>`).join('')}<a class="btn sm ${!mid?'':'sec'}" href="#temario">Todas</a></div>
+ <div style="margin-top:10px"><div class="row" style="justify-content:space-between"><b class="small">Avance global</b><span class="small">${progGlobal()}%</span></div>${barra(progGlobal())}</div></div>`;
+ ms.forEach(m=>{const cnt=[0,0,0,0];m.units.forEach(u=>cnt[st(u.id)]++);
+  x+=`<div class="card"><div class="row" style="justify-content:space-between"><h2 style="color:${m.color};margin:0">${esc(m.nombre)}</h2><span class="tag">${m.clave}</span></div>
+  <div style="margin:8px 0">${barra(progMateria(m),m.color)}<span class="muted">${progMateria(m)}% · ${m.units.length} unidades · ${cnt[3]} dominadas · ${cnt[2]} resumidas · ${cnt[1]} leídas</span></div>`;
+  m.libros.forEach(l=>{x+=`<details ${ms.length===1?'open':''}><summary>${l.n}. ${esc(l.nombre)} <span class="muted">(${esc(l.ref)})</span></summary>`;
+   if(!l.ley)x+=`<p class="muted small">Manual de la SEDENA: estúdialo con tu ejemplar oficial.</p>`;
+   l.grupos.forEach(g=>{x+=`<div style="margin:6px 0 2px 4px;font-weight:600;font-size:.9rem">${esc(g.t==='Ley completa.'?'Ley completa':g.t)}</div>`;
+    g.u.forEach((_,ui)=>{const u=m.units.find(z=>z.libro===l&&z.grupo===g.t&&z.titulo===g.u[ui][0]);const e=st(u.id);const nc=(S.cards||[]).filter(c=>c.u===u.id).length;
+     x+=`<div class="unit" onclick="location.hash='#unidad/${u.id}'"><span class="nm">${esc(u.titulo)}${u.sinNombre?' <span class="muted">(la guía no indica nombre)</span>':''}${nc?` <span class="tag k">${nc} tarjetas</span>`:''}</span><span class="pill st${e}">${ESTADOS[e]}</span></div>`;});});
+   x+=`</details>`;});
+  x+=`</div>`;});
+ return x;};
+
+/* ---- Unidad ---- */
+let uTab='preg';
+V.unidad=(id)=>{const u=UMAP[id];if(!u)return'<div class="card">Unidad no encontrada.</div>';const m=MMAP[u.m];const d=U(id);const qs=preguntas(u);
+ const tabs=[['preg','Preguntas guía'],['cornell','Notas Cornell'],['feyn','Feynman'],['mapa','Esquema'],['cards','Tarjetas']];
+ let x=`<div class="card hl" style="border-left-color:${m.color}"><a href="#temario/${m.id}" class="small">← ${esc(m.nombre)}</a>
+ <h1 style="margin-top:6px">${esc(u.tema)}</h1>
+ <div class="small"><b>${esc(u.libro.nombre)}</b> <span class="muted">${esc(u.libro.ref)}</span><br>${esc(u.grupo==='Ley completa.'?'Ley completa':u.grupo)}${u.completo?' · <b>Completo</b>':' · '+esc(u.titulo)}</div>
+ <label style="margin-top:10px">Estado</label><div class="seg">${ESTADOS.map((e,i)=>`<button class="${d.st===i?'on':''}" onclick="setEstado('${id}',${i})">${e}</button>`).join('')}</div>
+ <div class="row" style="margin-top:10px"><button class="btn sm" onclick="pomoUnidad('${id}')">▶ Pomodoro con esta unidad</button></div></div>
+ <div class="seg" style="margin-bottom:12px">${tabs.map(t=>`<button class="${uTab===t[0]?'on':''}" onclick="uTab='${t[0]}';render()">${t[1]}</button>`).join('')}</div>`;
+ if(uTab==='preg'){x+=`<div class="card"><div class="aviso">⚠️ Estas preguntas se generan <b>solo a partir del título</b> de la unidad en la guía oficial. La app <b>no contiene respuestas ni texto legal</b>. Respóndelas tú consultando ${esc(u.libro.corto)} (${esc(u.libro.ref)}). Primero intenta responder de memoria (recuperación activa) y después verifica.</div>
+  ${qs.map((q,i)=>`<div class="q">${i+1}. ${esc(q)}</div><textarea data-q="${i}" oninput="guardaResp('${id}',${i},this.value)" placeholder="Tu respuesta (con referencia al artículo / página)">${esc(d.ans[i]||'')}</textarea>`).join('')}
+  <div class="row" style="margin-top:8px"><button class="btn sm sec" onclick="leerPreg('${id}')">🔊 Escuchar preguntas y respuestas</button><button class="btn sm sec" onclick="detener()">⏹</button></div></div>`;}
+ if(uTab==='cornell'){x+=`<div class="card"><h3>Método Cornell</h3><p class="muted">Columna izquierda: palabras clave o preguntas. Derecha: notas mientras lees. Abajo: resumen en 3–5 líneas con tus palabras.</p>
+  <div class="cornell"><div><label>Claves / preguntas</label><textarea style="min-height:200px" oninput="guardaCornell('${id}','c',this.value)">${esc(d.cornell.c)}</textarea></div>
+  <div><label>Notas</label><textarea style="min-height:200px" oninput="guardaCornell('${id}','n',this.value)">${esc(d.cornell.n)}</textarea></div>
+  <div class="sum"><label>Resumen</label><textarea oninput="guardaCornell('${id}','s',this.value)">${esc(d.cornell.s)}</textarea></div></div>
+  <div class="row" style="margin-top:8px"><button class="btn sm sec" onclick="leer(S.units['${id}'].cornell.s+'. '+S.units['${id}'].cornell.n)">🔊 Escuchar resumen y notas</button><button class="btn sm sec" onclick="detener()">⏹</button></div></div>`;}
+ if(uTab==='feyn'){x+=`<div class="card"><h3>Técnica Feynman</h3><ol class="list small"><li>Explica «${esc(u.tema)}» como si se lo enseñaras a una enfermera recién egresada, sin tecnicismos.</li><li>Marca con <b>??</b> donde te trabes o no puedas explicar.</li><li>Regresa al texto oficial solo en esas partes y corrige.</li><li>Simplifica: ¿lo puedes decir en 5 líneas? ¿Con un ejemplo de tu servicio?</li></ol>
+  <textarea style="min-height:180px" oninput="guardaCampo('${id}','feyn',this.value)" placeholder="Mi explicación sencilla...">${esc(d.feyn)}</textarea></div>`;}
+ if(uTab==='mapa'){x+=`<div class="card"><h3>Esquema / mapa mental</h3><p class="small">Pon al centro <b>«${esc(u.tema)}»</b>. Crea ramas solo con lo que encuentres en el texto oficial, por ejemplo: definiciones · clasificaciones o tipos · sujetos / responsables · requisitos o etapas · obligaciones y consecuencias · relación con otras unidades. Usa colores y pocas palabras por rama.</p>
+  <p class="muted">Puedes dibujarlo en papel o en una app (ver <a href="#herramientas">Herramientas</a>) y aquí escribir el esquema en forma de lista con sangrías.</p>
+  <textarea style="min-height:200px;font-family:ui-monospace,monospace" oninput="guardaCampo('${id}','mapa',this.value)" placeholder="${esc(u.tema)}\n  - rama 1\n    - detalle\n  - rama 2">${esc(d.mapa)}</textarea></div>`;}
+ if(uTab==='cards'){const cs=S.cards.filter(c=>c.u===id);x+=`<div class="card"><h3>Tarjetas de esta unidad (${cs.length})</h3><p class="muted">Escribe una pregunta concreta al frente y la respuesta exacta (con artículo o página) atrás. Una idea por tarjeta.</p>
+  <label>Frente (pregunta)</label><textarea id="cF" style="min-height:60px"></textarea><label>Reverso (respuesta)</label><textarea id="cB" style="min-height:60px"></textarea>
+  <div class="row" style="margin-top:8px"><button class="btn" onclick="nuevaCarta('${id}')">+ Agregar tarjeta</button></div>
+  ${cs.map(c=>`<div class="task"><div class="tx"><b>${esc(c.f)}</b><br><span class="muted">${esc(c.b)}</span><br><span class="small muted">Próximo repaso: ${fmt(c.due)} · intervalo ${c.iv} d</span></div><button class="btn sm sec" onclick="borrarCarta('${c.id}')">Borrar</button></div>`).join('')}</div>`;}
+ return x;};
+function setEstado(id,i){U(id).st=i;marcaActividad();guardar();render();}
+let tSave;function deb(){clearTimeout(tSave);tSave=setTimeout(guardar,400);}
+function guardaResp(id,i,v){U(id).ans[i]=v;deb();}
+function guardaCornell(id,k,v){U(id).cornell[k]=v;deb();}
+function guardaCampo(id,k,v){U(id)[k]=v;deb();}
+
+/* ---- Texto a voz (Web Speech API, local) ---- */
+function leer(t){if(!('speechSynthesis' in window)){toast('Tu navegador no soporta lectura en voz alta.');return;}speechSynthesis.cancel();const txt=String(t||'').trim();if(!txt){toast('No hay texto para leer.');return;}
+ const ut=new SpeechSynthesisUtterance(txt);ut.lang='es-MX';const v=speechSynthesis.getVoices().find(v=>/es[-_]MX/i.test(v.lang))||speechSynthesis.getVoices().find(v=>/^es/i.test(v.lang));if(v)ut.voice=v;ut.rate=1;speechSynthesis.speak(ut);}
+function detener(){if('speechSynthesis' in window)speechSynthesis.cancel();}
+function leerPreg(id){const d=U(id);leer(preguntas(UMAP[id]).map((q,i)=>q+' '+(d.ans[i]||'')).join('. '));}
+/* ====== TARJETAS: repetición espaciada (algoritmo SM-2) ====== */
+function cartasPendientes(){const h=hoy();return S.cards.filter(c=>c.due<=h);}
+function nuevaCarta(uid){const f=$('#cF').value.trim(),b=$('#cB').value.trim();if(!f||!b){toast('Escribe frente y reverso.');return;}
+ S.cards.push({id:'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,5),u:uid,f,b,ef:2.5,iv:0,rep:0,due:hoy(),creada:hoy()});marcaActividad();guardar();render();toast('Tarjeta agregada');}
+function borrarCarta(cid){if(!confirm('¿Borrar esta tarjeta?'))return;S.cards=S.cards.filter(c=>c.id!==cid);guardar();render();}
+function sm2(c,q){ // q: 0..5
+ if(q<3){c.rep=0;c.iv=1;}else{c.rep++;c.iv=c.rep===1?1:c.rep===2?6:Math.round(c.iv*c.ef);}
+ c.ef=Math.max(1.3,c.ef+(0.1-(5-q)*(0.08+(5-q)*0.02)));c.due=ymd(addD(new Date(),c.iv));}
+let flipped=false,filtroM='';
+V.practicar=(modo)=>{if(modo==='sim')return vistaSim();
+ const due=cartasPendientes().filter(c=>!filtroM||UMAP[c.u].m===filtroM);
+ let x=`<div class="seg" style="margin-bottom:12px"><button class="on">Tarjetas (repaso espaciado)</button><button onclick="location.hash='#practicar/sim'">Simulacro</button></div>`;
+ x+=`<div class="card hl"><div class="row" style="justify-content:space-between"><h1 style="margin:0">Tarjetas de hoy</h1><span class="tag">${due.length} pendientes · ${S.cards.length} en total</span></div>
+ <label>Filtrar por materia</label><select onchange="filtroM=this.value;flipped=false;render()"><option value="">Todas (intercaladas)</option>${MATERIAS.map(m=>`<option value="${m.id}" ${filtroM===m.id?'selected':''}>${esc(m.nombre)}</option>`).join('')}</select></div>`;
+ if(!S.cards.length)return x+`<div class="card info">Aún no tienes tarjetas. Crea las tuyas desde cada unidad del <a href="#temario">Temario</a> → pestaña «Tarjetas». La app no trae tarjetas prehechas para no inventar contenido: tú las llenas con el texto oficial.</div>`;
+ if(!due.length)return x+`<div class="card"><p>✅ ¡Al día! No hay tarjetas pendientes${filtroM?' en esta materia':''}. Vuelve mañana.</p></div>`;
+ const c=due[0];const u=UMAP[c.u];
+ x+=`<div class="card"><div class="small">${tagM(u.m)} <span class="muted">${esc(u.tema)}</span></div><div class="flash" style="margin-top:8px">${esc(flipped?c.b:c.f)}</div>`;
+ if(!flipped)x+=`<p class="muted">Intenta responder en voz alta o por escrito antes de voltear.</p><button class="btn" style="width:100%" onclick="flipped=true;render()">Mostrar respuesta</button>`;
+ else x+=`<p class="muted">¿Qué tan bien la recordaste?</p><div class="grid g4"><button class="btn peligro" onclick="calif('${c.id}',1)">Otra vez</button><button class="btn sec" onclick="calif('${c.id}',3)">Difícil</button><button class="btn" onclick="calif('${c.id}',4)">Bien</button><button class="btn" style="background:var(--ok)" onclick="calif('${c.id}',5)">Fácil</button></div>`;
+ return x+`</div>`;};
+function calif(id,q){const c=S.cards.find(x=>x.id===id);if(!c)return;sm2(c,q);flipped=false;marcaActividad();guardar();render();}
+
+/* ====== SIMULACRO (práctica de examen con preguntas guía, intercalado) ====== */
+let SIM=null;
+function vistaSim(){
+ let x=`<div class="seg" style="margin-bottom:12px"><button onclick="location.hash='#practicar'">Tarjetas (repaso espaciado)</button><button class="on">Simulacro</button></div>`;
+ if(!SIM){const vistos=UNITS.filter(u=>st(u.id)>=1).length;
+  x+=`<div class="card hl"><h1>Simulacro</h1><p class="small">Práctica de examen intercalada: la app toma preguntas guía al azar de distintas materias. Responde <b>sin ver el manual</b>, luego compara con tu respuesta guardada o con el texto oficial y califícate con honestidad.</p>
+  <label>Origen de las preguntas</label><select id="sOr"><option value="vistas">Unidades que ya leí o más (${vistos})</option><option value="todas">Todo el temario (${UNITS.length})</option>${MATERIAS.map(m=>`<option value="${m.id}">${esc(m.nombre)}</option>`).join('')}</select>
+  <label>Número de preguntas</label><select id="sN"><option>10</option><option selected>20</option><option>30</option><option>50</option></select>
+  <div class="row" style="margin-top:10px"><button class="btn" onclick="iniciarSim()">Comenzar</button></div></div>`;
+  const ult=S.sims.slice(-8).reverse();
+  if(ult.length)x+=`<div class="card"><h3>Últimos simulacros</h3>${ult.map(s=>`<div class="task"><div class="tx">${fmt(s.f)} · ${s.n} preguntas</div><span class="min">${s.pct}% bien</span></div>`).join('')}</div>`;
+  return x;}
+ if(SIM.i>=SIM.qs.length){const ok=SIM.res.filter(r=>r===2).length,re=SIM.res.filter(r=>r===1).length;const p=pct(ok+re*0.5,SIM.qs.length);
+  const malas=SIM.qs.filter((q,i)=>SIM.res[i]===0).map(q=>q.u);const uniq=[...new Set(malas)];
+  x+=`<div class="card hl"><h1>Resultado: ${p}%</h1><p>${ok} bien · ${re} regular · ${SIM.qs.length-ok-re} por reforzar</p>${uniq.length?`<h3>Unidades a reforzar</h3>${uniq.map(id=>`<div class="unit" onclick="location.hash='#unidad/${id}'"><span class="nm">${tagM(UMAP[id].m)} ${esc(UMAP[id].tema)}</span><span class="pill st${st(id)}">${ESTADOS[st(id)]}</span></div>`).join('')}`:''}
+  <div class="row" style="margin-top:10px"><button class="btn" onclick="SIM=null;render()">Terminar</button></div></div>`;return x;}
+ const q=SIM.qs[SIM.i];const u=UMAP[q.u];const guardada=(S.units[q.u]&&S.units[q.u].ans[q.k])||'';
+ x+=`<div class="card"><div class="row" style="justify-content:space-between"><span class="tag">Pregunta ${SIM.i+1}/${SIM.qs.length}</span>${tagM(u.m)}</div>
+ <p class="small muted" style="margin:8px 0 2px">${esc(u.libro.nombre)} · ${esc(u.completo?u.grupo:u.titulo)}</p><div class="q" style="font-size:1rem">${esc(preguntas(u)[q.k])}</div>
+ <textarea id="simR" placeholder="Responde de memoria..."></textarea>`;
+ if(!SIM.show)x+=`<div class="row" style="margin-top:8px"><button class="btn" onclick="SIM.show=true;render()">Comparar</button></div>`;
+ else x+=`<div class="card info" style="margin-top:8px"><b>Tu respuesta guardada en la unidad:</b><br>${guardada?esc(guardada).replace(/\n/g,'<br>'):'<span class="muted">Aún no la has escrito. Verifica en el texto oficial y guárdala en la unidad.</span>'}</div>
+  <div class="grid g3"><button class="btn peligro" onclick="calSim(0)">Por reforzar</button><button class="btn sec" onclick="calSim(1)">Regular</button><button class="btn" onclick="calSim(2)">Bien</button></div>`;
+ return x+`</div>`;}
+function iniciarSim(){const o=$('#sOr').value,n=+$('#sN').value;let pool=o==='vistas'?UNITS.filter(u=>st(u.id)>=1):o==='todas'?UNITS:UNITS.filter(u=>u.m===o);
+ if(!pool.length){toast('Aún no hay unidades marcadas como leídas. Elige «Todo el temario».');return;}
+ const qs=[];const all=[];pool.forEach(u=>preguntas(u).forEach((_,k)=>{if(k<6)all.push({u:u.id,k});}));
+ for(let i=all.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[all[i],all[j]]=[all[j],all[i]];}
+ // intercalar: evitar dos seguidas de la misma materia cuando sea posible
+ while(qs.length<Math.min(n,all.length)){let j=all.findIndex(a=>!qs.length||UMAP[a.u].m!==UMAP[qs[qs.length-1].u].m);if(j<0)j=0;qs.push(all.splice(j,1)[0]);}
+ SIM={qs,i:0,res:[],show:false};render();}
+function calSim(v){SIM.res[SIM.i]=v;SIM.i++;SIM.show=false;marcaActividad();
+ if(SIM.i>=SIM.qs.length){const ok=SIM.res.filter(r=>r===2).length,re=SIM.res.filter(r=>r===1).length;S.sims.push({f:hoy(),n:SIM.qs.length,pct:pct(ok+re*0.5,SIM.qs.length)});}
+ guardar();render();}
+
+/* ====== POMODORO ====== */
+let pomoInt=null;
+V.pomodoro=()=>{const p=S.pomo;const r=S.pomoRun;
+ const sel=r?r.m:(p.lastM||'LM');
+ const unidades=(MMAP[sel]?MMAP[sel].units:[]);
+ let x=`<div class="card hl" style="text-align:center"><h1>Pomodoro</h1>
+ <div class="tag" style="font-size:.85rem">${r?(r.modo==='work'?'Concentración':'Descanso'):'Listo'}</div>
+ <div class="timer" id="tmr">${r?mmss(Math.max(0,r.fin-Date.now())):mmss(p.work*60000)}</div>
+ <div class="muted">Pomodoros completados hoy: ${S.logs.filter(l=>l.f===hoy()&&l.k==='pomo').length} · ciclo ${p.count%p.every}/${p.every}</div>
+ <div class="row" style="justify-content:center;margin-top:10px">${r?`<button class="btn peligro" onclick="pomoStop()">■ Detener</button>${r.modo!=='work'?'<button class="btn sec" onclick="pomoStart(\'work\')">Saltar descanso</button>':''}`:`<button class="btn" onclick="pomoStart('work')">▶ Concentración ${p.work} min</button><button class="btn sec" onclick="pomoStart('short')">Descanso ${p.short}</button><button class="btn sec" onclick="pomoStart('long')">Largo ${p.long}</button>`}</div></div>
+ <div class="card"><label>Materia</label><select id="pM" ${r?'disabled':''} onchange="S.pomo.lastM=this.value;S.pomo.lastU='';guardar();render()">${MATERIAS.map(m=>`<option value="${m.id}" ${sel===m.id?'selected':''}>${esc(m.nombre)}</option>`).join('')}<option value="ING" ${sel==='ING'?'selected':''}>Diagnóstico de Inglés</option><option value="GEN" ${sel==='GEN'?'selected':''}>General / simulacro</option></select>
+ ${unidades.length?`<label>Unidad (opcional)</label><select id="pU" ${r?'disabled':''} onchange="S.pomo.lastU=this.value;guardar()"><option value="">—</option>${unidades.map(u=>`<option value="${u.id}" ${(r?r.u:p.lastU)===u.id?'selected':''}>${esc(u.libro.nombre.slice(0,30))}… · ${esc(u.tema.slice(0,60))}</option>`).join('')}</select>`:''}
+ <details style="margin-top:10px"><summary>Configurar tiempos</summary><div class="grid g4"><div><label>Concentración</label><input type="number" min="5" max="90" value="${p.work}" onchange="S.pomo.work=+this.value||25;guardar();render()"></div><div><label>Descanso corto</label><input type="number" min="1" max="30" value="${p.short}" onchange="S.pomo.short=+this.value||5;guardar();render()"></div><div><label>Descanso largo</label><input type="number" min="5" max="60" value="${p.long}" onchange="S.pomo.long=+this.value||15;guardar();render()"></div><div><label>Largo cada</label><input type="number" min="2" max="8" value="${p.every}" onchange="S.pomo.every=+this.value||4;guardar();render()"></div></div></details></div>
+ <div class="card"><h3>Registrar tiempo manual</h3><p class="muted">Si estudiaste sin el temporizador, regístralo para tus estadísticas (se asigna a la materia seleccionada arriba).</p><div class="row"><input type="number" id="manMin" min="5" max="600" step="5" placeholder="minutos" style="width:120px"><button class="btn sec" onclick="registroManual()">Registrar</button></div></div>
+ <div class="card info small"><b>Cómo usarlo:</b> elige una sola unidad, silencia el celular y trabaja ${p.work} min sin interrupciones. En el descanso levántate, toma agua y no revises redes. Cada ${p.every} pomodoros, descanso largo.</div>`;
+ return x;};
+V._after_pomodoro=()=>{};
+const mmss=ms=>{const s=Math.round(ms/1000);return pad(Math.floor(s/60))+':'+pad(s%60);};
+function pomoStart(modo){const p=S.pomo;const m=($('#pM')&&$('#pM').value)||p.lastM||'LM';const u=($('#pU')&&$('#pU').value)||'';
+ const dur=(modo==='work'?p.work:modo==='short'?p.short:p.long)*60000;
+ S.pomoRun={modo,ini:Date.now(),fin:Date.now()+dur,m,u};p.lastM=m;guardar();
+ if('Notification' in window&&Notification.permission==='default')try{Notification.requestPermission();}catch(e){}
+ tick();render();}
+function pomoUnidad(id){S.pomo.lastM=UMAP[id].m;S.pomo.lastU=id;guardar();location.hash='#pomodoro';}
+function logMin(m,u,min,k){if(min<1)return;S.logs.push({f:hoy(),m,u,min:Math.round(min),k});marcaActividad();}
+function pomoStop(){const r=S.pomoRun;if(r&&r.modo==='work'){const min=(Date.now()-r.ini)/60000;if(min>=1){logMin(r.m,r.u,min,'parcial');toast(`Se registraron ${Math.round(min)} min`);}}S.pomoRun=null;guardar();render();}
+function registroManual(){const v=+$('#manMin').value;if(!v){toast('Escribe los minutos.');return;}logMin(($('#pM')&&$('#pM').value)||'GEN','',v,'manual');guardar();toast('Tiempo registrado');render();}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();[0,0.35,0.7].forEach(t=>{const o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(0.2,a.currentTime+t);g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+t+0.3);o.start(a.currentTime+t);o.stop(a.currentTime+t+0.3);});}catch(e){}
+ if(navigator.vibrate)navigator.vibrate([200,100,200]);}
+function avisar(t){beep();toast(t);try{if('Notification' in window&&Notification.permission==='granted')new Notification('Plan de Ascenso',{body:t});}catch(e){}}
+function tick(){clearInterval(pomoInt);pomoInt=setInterval(()=>{const r=S.pomoRun;const bar=$('#pomoBar');
+  if(!r){bar.style.display='none';clearInterval(pomoInt);return;}
+  const left=r.fin-Date.now();bar.style.display='block';bar.textContent=`${r.modo==='work'?'⏱ Concentración':'☕ Descanso'} · ${mmss(Math.max(0,left))} · ${r.m}`;
+  const t=$('#tmr');if(t)t.textContent=mmss(Math.max(0,left));
+  if(left<=0){const p=S.pomo;
+   if(r.modo==='work'){logMin(r.m,r.u,p.work,'pomo');p.count++;const largo=p.count%p.every===0;S.pomoRun={modo:largo?'long':'short',ini:Date.now(),fin:Date.now()+(largo?p.long:p.short)*60000,m:r.m,u:r.u};avisar(largo?'¡Pomodoro completo! Descanso largo.':'¡Pomodoro completo! Toma un descanso.');}
+   else{S.pomoRun=null;avisar('Fin del descanso. ¿Listo el siguiente pomodoro?');}
+   guardar();if(location.hash==='#pomodoro'||location.hash==='#inicio'||location.hash==='')render();}},500);}
+
+/* ====== MÁS ====== */
+V.mas=()=>`<div class="mas">
+ <a class="card hl" href="#tecnicas"><h2>🧠 Técnicas de estudio</h2><span class="muted">Qué son y cómo las usa esta app</span></a>
+ <a class="card hl" href="#herramientas"><h2>🔗 Fuentes oficiales y herramientas digitales</h2><span class="muted">Leyes vigentes, DOF, apps gratuitas</span></a>
+ <a class="card hl" href="#ingles"><h2>🇺🇸 Diagnóstico de Inglés</h2><span class="muted">Práctica diaria corta con recursos gratuitos</span></a>
+ <a class="card hl" href="#fisico"><h2>🏃‍♀️ Capacidad Física</h2><span class="muted">Registro semanal de hábitos</span></a>
+ <a class="card hl" href="#setup"><h2>📅 Configurar / recalcular plan</h2><span class="muted">Fechas y minutos disponibles</span></a>
+ <a class="card hl" href="#ajustes"><h2>💾 Respaldo y datos</h2><span class="muted">Exportar, importar, borrar</span></a></div>`;
+
+const TECNICAS=[
+ ['Recuperación activa (active recall)','Cerrar el libro e intentar recordar es lo que más fija la memoria. Úsala con las <b>Preguntas guía</b> de cada unidad: responde primero de memoria y luego verifica.'],
+ ['Repetición espaciada','Repasar justo antes de olvidar. Las <b>Tarjetas</b> usan el algoritmo SM-2: si la recuerdas fácil, el intervalo crece (1 → 6 → 15 días…); si fallas, vuelve mañana. Repasa la cola de «tarjetas de hoy» todos los días (10 min).'],
+ ['Pomodoro','Bloques de 25 min de concentración total y 5 de descanso (configurable). Cada 4, un descanso largo. El temporizador registra tus minutos por materia para la gráfica del Inicio.'],
+ ['Técnica Feynman','Explica el tema con palabras sencillas como si enseñaras a alguien. Donde te trabes está tu laguna: vuelve al texto solo en esa parte. Pestaña «Feynman» en cada unidad.'],
+ ['Notas Cornell','Hoja dividida: claves/preguntas a la izquierda, notas a la derecha, resumen abajo. Al repasar, tapa las notas y responde las claves. Pestaña «Notas Cornell» en cada unidad.'],
+ ['Esquemas y mapas mentales','Organiza visualmente la estructura de cada título o capítulo: concepto al centro y ramas con clasificaciones, sujetos, requisitos y consecuencias. Ideal para leyes con muchos capítulos.'],
+ ['Intercalado (interleaving)','Alternar materias en vez de estudiar una sola durante semanas mejora la capacidad de distinguir y aplicar. El plan mezcla materias cada día y el simulacro mezcla preguntas.'],
+ ['Práctica de examen (practice testing)','Ponerte a prueba es estudiar. Cada semana hay un <b>mini-simulacro acumulativo</b> y en el repaso final simulacros generales. Las unidades que falles se marcan para reforzar.'],
+ ['Lectura activa','Antes de leer, revisa títulos y preguntas guía; durante la lectura subraya poco y anota en Cornell; al terminar, resume sin ver.'],
+ ['Escuchar (texto a voz)','Usa el botón 🔊 para escuchar tus resúmenes y respuestas (voz del dispositivo, sin internet en la mayoría de los teléfonos). Útil en traslados.']];
+V.tecnicas=()=>`<div class="card hl"><h1>Técnicas de estudio</h1><p class="muted">Basadas en evidencia de psicología del aprendizaje. Así las integra la app:</p></div>`+TECNICAS.map(t=>`<div class="card"><h3>${t[0]}</h3><p class="small" style="margin:0">${t[1]}</p></div>`).join('')+
+ `<div class="card info small"><b>Rutina sugerida por unidad:</b> 1) lee las preguntas guía → 2) lectura activa con Cornell (1–2 pomodoros) → 3) responde las preguntas sin ver → 4) verifica y corrige → 5) explícala (Feynman) → 6) crea 5–10 tarjetas → 7) marca «Resumido». Cuando aciertes sus preguntas en simulacros y tarjetas, márcala «Dominado».</div>`;
+
+/* Enlaces verificados (respuesta correcta del sitio al momento de crear la app). */
+const FUENTES=[
+ ['Leyes Federales Vigentes – Cámara de Diputados','https://www.diputados.gob.mx/LeyesBiblio/index.htm','Texto vigente en PDF/Word de: Código de Justicia Militar, Ley Federal de Armas de Fuego y Explosivos, Ley Orgánica del Ejército y Fuerza Aérea Mexicanos, Ley del ISSFAM, Ley de Disciplina del Ejército, Fuerza Aérea y Guardia Nacional, Ley de Ascensos y Recompensas del Ejército, Fuerza Aérea y Guardia Nacional y Ley Nacional sobre el Uso de la Fuerza.'],
+ ['Reglamentos de Leyes Federales – Cámara de Diputados','https://www.diputados.gob.mx/LeyesBiblio/regla.htm','Incluye el Reglamento de la Ley de Ascensos y Recompensas del Ejército, Fuerza Aérea y Guardia Nacional.'],
+ ['Diario Oficial de la Federación (DOF)','https://www.dof.gob.mx','Para consultar publicaciones por fecha (por ejemplo, las fechas que cita la guía) y el Reglamento General de Deberes Militares y sus reformas.'],
+ ['Secretaría de la Defensa Nacional – gob.mx','https://www.gob.mx/defensa','Portal oficial de la Defensa.']];
+const APPS=[
+ ['Anki','https://apps.ankiweb.net','Tarjetas con repetición espaciada (gratis en Android, Windows, Mac y web). Útil si quieres llevar tus tarjetas a la computadora.'],
+ ['Quizlet','https://quizlet.com','Tarjetas y modos de práctica; puedes compartir mazos con compañeras.'],
+ ['Forest','https://www.forestapp.cc','Bloquea distracciones del celular mientras estudias (planta un árbol virtual).'],
+ ['Pomofocus','https://pomofocus.io','Temporizador Pomodoro en el navegador, alternativa al de esta app.'],
+ ['Google Calendar','https://calendar.google.com','Importa el archivo .ics de tu plan (pantalla Plan) para recibir recordatorios diarios.'],
+ ['NotebookLM (Google)','https://notebooklm.google.com','Sube los PDF oficiales de las leyes y pídele resúmenes o preguntas citando el texto. Verifica siempre contra el documento.'],
+ ['NaturalReader','https://www.naturalreaders.com','Texto a voz: escucha las leyes en PDF mientras te trasladas.'],
+ ['TTSReader','https://ttsreader.com','Texto a voz gratis en el navegador: pega un capítulo y escúchalo.'],
+ ['XMind','https://www.xmind.com','Mapas mentales.'],
+ ['MindMeister','https://www.mindmeister.com','Mapas mentales en línea.'],
+ ['GoConqr','https://www.goconqr.com','Mapas mentales, fichas y tests en un solo lugar.']];
+const lnk=x=>`<div class="task"><div class="tx"><a href="${x[1]}" target="_blank" rel="noopener"><b>${x[0]}</b></a><br><span class="small">${x[2]}</span><br><span class="muted small">${x[1]}</span></div></div>`;
+V.herramientas=()=>`<div class="card hl"><h1>Fuentes oficiales y herramientas</h1></div>
+ <div class="card"><h2>Textos legales oficiales</h2>${FUENTES.map(lnk).join('')}
+ <div class="aviso" style="margin-top:8px"><b>Ojo con las versiones:</b> la guía cita una fecha de D.O.F. para cada ordenamiento (p. ej. CJM 16-07-2025; Reglamento de la Ley de Ascensos 03-05-2023). Los portales oficiales muestran el texto <b>vigente</b>, que puede tener reformas posteriores a la fecha citada. Compara la fecha de última reforma y, si difiere, confirma por conducto regular cuál versión se evalúa.</div></div>
+ <div class="card"><h2>Manuales de la SEDENA (DN M …)</h2><p class="small">Los manuales del temario (Logística Militar DN M 1459, Operaciones Militares DN M 1455, Derechos Humanos DN M 110, Aspectos Administrativos de Enfermería DN M 1106, Mando y Liderazgo Militar DN14/I/PFA/S3/N4/F4/F3/0002, Adiestramiento DN M 106 y Aspectos Técnicos de Enfermería DN M 1103) son de distribución interna. <b>Usa tus propios ejemplares oficiales</b> en la edición que indica la guía; esta app no los enlaza ni reproduce.</p></div>
+ <div class="card"><h2>Apps gratuitas recomendadas</h2>${APPS.map(lnk).join('')}<p class="muted small">Algunas tienen funciones de pago opcionales; las básicas son gratuitas.</p></div>`;
+
+const ING_SEM=[['Lunes','Vocabulario: 10 palabras nuevas en tarjetas (inglés → español) y repásalas.'],['Martes','Escucha: un episodio corto de BBC Learning English o VOA Learning English; anota 5 frases.'],['Miércoles','Gramática: un tema en British Council LearnEnglish y sus ejercicios.'],['Jueves','Lectura: una noticia en VOA Learning English (nivel 1 o 2); resume en 3 líneas en inglés.'],['Viernes','Lección diaria de Duolingo o USA Learns + leer en voz alta 5 minutos.'],['Sábado','Repaso: vuelve a escuchar el audio del martes sin texto; ¿cuánto entiendes ahora?'],['Domingo','Mini-autoevaluación: un test de nivel o ejercicios de gramática de lo que más te costó.']];
+const ING_REC=[['BBC Learning English','https://www.bbc.co.uk/learningenglish','Cursos, audios y videos cortos gratuitos por nivel.'],['VOA Learning English','https://learningenglish.voanews.com','Noticias en inglés lento con texto y audio.'],['British Council – LearnEnglish','https://learnenglish.britishcouncil.org','Gramática, vocabulario y ejercicios interactivos.'],['USA Learns','https://www.usalearns.org','Curso gratuito de inglés con video.'],['Duolingo','https://www.duolingo.com','Práctica diaria de 5–10 minutos.']];
+V.ingles=()=>{const h=hoy();const d=dow(new Date());let x=`<div class="card hl"><h1>Diagnóstico de Inglés</h1><p class="small">Se presenta el <b>Día uno</b>. Lo mejor es una práctica <b>corta y diaria</b> (10–15 min) en lugar de sesiones largas ocasionales.</p>
+ <div class="card info"><b>Hoy (${DIAS[d]}):</b> ${ING_SEM[d][1]}<div class="row" style="margin-top:8px"><label class="row" style="font-weight:400"><input type="checkbox" ${S.habits.ingles[h]?'checked':''} onchange="habIngles(this.checked);render()"> Hecho hoy</label></div></div></div>`;
+ const lun=addD(new Date(),-d);x+=`<div class="card"><h3>Esta semana</h3><table class="hab"><tr>${DIAS3.map(z=>`<th>${z}</th>`).join('')}</tr><tr>${DIAS3.map((_,i)=>{const k=ymd(addD(lun,i));return `<td>${S.habits.ingles[k]?'✅':'·'}</td>`;}).join('')}</tr></table></div>`;
+ x+=`<div class="card"><h3>Rutina semanal sugerida</h3>${ING_SEM.map(z=>`<div class="task"><div class="tx"><b>${z[0]}:</b> ${z[1]}</div></div>`).join('')}<p class="muted small">Tip: crea tarjetas de vocabulario en cualquier unidad o en Anki y regístralas con el Pomodoro eligiendo «Diagnóstico de Inglés».</p></div>
+ <div class="card"><h3>Recursos gratuitos</h3>${ING_REC.map(lnk).join('')}</div>`;return x;};
+
+const FIS=[['cardio','Cardio (trote/caminata)'],['fuerza','Fuerza (abdominales, lagartijas, sentadillas)'],['movilidad','Flexibilidad / movilidad'],['otro','Otra actividad']];
+V.fisico=()=>{const d=dow(new Date());const lun=addD(new Date(),-d);const ks=DIAS3.map((_,i)=>ymd(addD(lun,i)));
+ let tot=0;ks.forEach(k=>{const o=S.habits.fisico[k]||{};if(Object.values(o).some(Boolean))tot++;});
+ return `<div class="card hl"><h1>Capacidad Física</h1><p class="small">Se evalúa el <b>Día tres</b> junto con el Examen Médico. Consulta en tu unidad las pruebas y marcas oficiales vigentes para tu edad y sexo; esta sección es un registro genérico de hábitos.</p><div class="stat"><b>${tot}/7</b><span>días activos esta semana</span></div></div>
+ <div class="card"><h3>Semana actual</h3><div style="overflow-x:auto"><table class="hab"><tr><th>Actividad</th>${DIAS3.map((z,i)=>`<th>${z}<br><span class="muted">${parse(ks[i]).getDate()}</span></th>`).join('')}</tr>
+ ${FIS.map(f=>`<tr><td>${f[1]}</td>${ks.map(k=>`<td><input type="checkbox" ${(S.habits.fisico[k]||{})[f[0]]?'checked':''} onchange="habFis('${k}','${f[0]}',this.checked)" aria-label="${f[1]} ${k}"></td>`).join('')}</tr>`).join('')}</table></div></div>
+ <div class="card small"><h3>Recomendaciones generales</h3><ul class="list"><li>Meta general: al menos 150 min semanales de actividad aeróbica moderada y 2 días de fuerza (recomendación general de la OMS para adultos).</li><li>Aumenta la carga de forma gradual y deja días de recuperación.</li><li>Practica las pruebas en las mismas condiciones del examen (hora, calzado, superficie) en las últimas semanas.</li><li>Si tienes alguna lesión o condición médica, consulta antes a tu médico.</li><li>Dormir 7–8 horas también es parte del entrenamiento y de la memoria.</li></ul></div>`;};
+function habFis(k,a,v){S.habits.fisico[k]=S.habits.fisico[k]||{};S.habits.fisico[k][a]=v;guardar();render();}
+
+/* ====== RESPALDO ====== */
+V.ajustes=()=>`<div class="card hl"><h1>Respaldo y datos</h1><p class="small">Todo se guarda <b>solo en este navegador</b> (localStorage). Si borras los datos del navegador o cambias de teléfono, necesitarás tu respaldo.</p>
+ <div class="row"><button class="btn" onclick="exportar()">⬇ Exportar respaldo (JSON)</button><label class="btn sec" style="margin:0">⬆ Importar respaldo<input type="file" accept="application/json,.json" class="hide" onchange="importar(this)"></label></div></div>
+ <div class="card"><h3>Resumen</h3><ul class="list small"><li>Unidades con avance: ${Object.values(S.units).filter(u=>u.st>0).length} / ${UNITS.length}</li><li>Tarjetas: ${S.cards.length}</li><li>Registros de tiempo: ${S.logs.length}</li><li>Simulacros: ${S.sims.length}</li></ul></div>
+ <div class="card"><h3>Zona de riesgo</h3><button class="btn peligro" onclick="borrarTodo()">Borrar todos mis datos</button></div>
+ <p class="muted small" style="text-align:center">Plan de Ascenso · temario: Apéndice Promoción General 2026 (Caps. 2/os.)</p>`;
+function descargar(nombre,tipo,txt){const b=new Blob([txt],{type:tipo});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=nombre;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+function exportar(){descargar(`respaldo-plan-ascenso-${hoy()}.json`,'application/json',JSON.stringify(S,null,1));toast('Respaldo descargado');}
+function importar(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x||x.v!==1)throw 0;if(!confirm('Esto reemplazará los datos actuales por los del respaldo. ¿Continuar?'))return;S=Object.assign(nuevoEstado(),x);guardar();render();tick();toast('Respaldo importado ✔');}catch(e){toast('Archivo no válido.');}};r.readAsText(f);}
+function borrarTodo(){if(!confirm('¿Seguro? Se borrará todo tu avance en este dispositivo.'))return;if(!confirm('Última confirmación: ¿borrar todo?'))return;localStorage.removeItem(KEY);S=nuevoEstado();render();toast('Datos borrados');}
+function exportarICS(){if(!S.plan)return;const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//PlanAscenso//ES','CALSCALE:GREGORIAN'];
+ const limpio=h=>h.replace(/<br>/g,' – ').replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
+ const icsEsc=t=>t.replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n');
+ const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+ Object.keys(S.plan.days).sort().forEach(k=>{const ts=S.plan.days[k].filter(t=>t.t!=='rest');if(!ts.length)return;const d=k.replace(/-/g,'');const d2=ymd(addD(parse(k),1)).replace(/-/g,'');
+  const tot=ts.reduce((a,t)=>a+(t.min||0),0);const ex=ts.find(t=>t.t==='exam');
+  L.push('BEGIN:VEVENT','UID:'+d+'-plan@plan-ascenso','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+d,'DTEND;VALUE=DATE:'+d2,'SUMMARY:'+icsEsc(ex?ex.txt:`Estudio (${tot} min)`),'DESCRIPTION:'+icsEsc(ts.map(t=>'• '+limpio(textoTarea(t))+(t.min?` (${t.min} min)`:'')).join('\n')),'END:VEVENT');});
+ L.push('END:VCALENDAR');descargar('plan-ascenso.ics','text/calendar',L.join('\r\n'));toast('Calendario descargado');}
+
+/* ====== INICIO ====== */
+render();if(S.pomoRun)tick();
+if(!S.settings&&!location.hash)location.hash='#inicio';
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>
+</body>
+</html>
