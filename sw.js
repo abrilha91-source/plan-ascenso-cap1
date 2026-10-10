@@ -1,5 +1,5 @@
 // Service worker: guarda la app en caché para usarla sin conexión.
-const CACHE='plan-ascenso-v3';
+const CACHE='plan-ascenso-v4';
 const FILES=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./contenido-leyes.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==CACHE).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});
