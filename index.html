@@ -185,6 +185,9 @@ mark.sv{background:linear-gradient(transparent 30%,rgba(255,138,92,.45) 30%)}
 .mini{display:inline-flex;vertical-align:middle}
 .cont-tag{font-size:.68rem;padding:2px 7px;border-radius:99px;background:var(--verde-cl);color:var(--pri-osc);font-weight:700;margin-left:4px}
 .cont-tag.priv{background:#fff0ea;color:#b5452a}
+.cont-tag.ver{background:#e3f6e8;color:#1e7a3c}.cont-tag.nv{background:#fff6dc;color:#8a6200}.cont-tag.ex{background:#e8eefc;color:#2b4fa8}
+.opt>span:last-child{white-space:pre-line}.ses-q,.q{white-space:pre-line}
+.bk-t{width:100%;border-collapse:collapse;font-size:.8rem}.bk-t td,.bk-t th{padding:5px 4px;border-bottom:1px solid var(--borde);text-align:right}.bk-t td:first-child,.bk-t th:first-child{text-align:left}
 /* ===== v4 componentes ===== */
 .hero{position:relative;overflow:hidden;border-radius:28px;padding:20px 18px 18px;color:#fff;background:var(--grad);box-shadow:0 18px 40px rgba(91,75,245,.35);margin-bottom:16px}
 .hero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.28),transparent 65%)}
@@ -331,6 +334,7 @@ html.dark .card.warn{background:linear-gradient(135deg,#332415,#2c1a24);border-c
 html.dark .card.info{background:linear-gradient(135deg,#221d4a,#2a1a3f);border-color:#3b3274}
 html.dark .aviso{background:#2c2312;border-color:#5c4a22}
 html.dark .tag.k,html.dark .cont-tag.priv{color:#ffb79a}
+html.dark .cont-tag.ver{background:#163d24;color:#9be3b0}html.dark .cont-tag.nv{background:#3d3214;color:#f1d27a}html.dark .cont-tag.ex{background:#1d2a4d;color:#a9c0ff}
 html.dark .kind.k-leer{background:#13294a;color:#8cc4ff}html.dark .kind.k-card{background:#3a2015;color:#ffb48f}
 html.dark .bite p.fr{border-left-color:#24456e}
 html.dark .flip .fc.back{background:linear-gradient(160deg,#2c1d2e,#1a1636)}
@@ -486,7 +490,7 @@ function preguntas(u){
 /* ====== ESTADO (solo localStorage en este dispositivo) ====== */
 const KEY='planAscensoCap1.v1';
 const FECHA_PROBABLE='2027-04-01'; // fecha probable (abril 2027), editable en Configurar plan
-function nuevoEstado(){return{v:1,settings:null,units:{},cards:[],plan:null,logs:[],habits:{ingles:{},fisico:{}},activity:{},sims:[],pomo:{work:25,short:5,long:15,every:4,count:0},pomoRun:null,g:{},qz:{},dark:false};}
+function nuevoEstado(){return{v:1,settings:null,units:{},cards:[],plan:null,logs:[],habits:{ingles:{},fisico:{}},activity:{},sims:[],pomo:{work:25,short:5,long:15,every:4,count:0},pomoRun:null,g:{},qz:{},bk:{},dark:false};}
 let S=cargar();
 function cargar(){try{const x=JSON.parse(localStorage.getItem(KEY));if(x&&x.v===1)return Object.assign(nuevoEstado(),x);}catch(e){}return nuevoEstado();}
 function guardar(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){toast('No se pudo guardar (almacenamiento lleno).');}}
@@ -809,8 +813,8 @@ function sm2(c,q){ // q: 0..5
  if(q<3){c.rep=0;c.iv=1;}else{c.rep++;c.iv=c.rep===1?1:c.rep===2?6:Math.round(c.iv*c.ef);}
  c.ef=Math.max(1.3,c.ef+(0.1-(5-q)*(0.08+(5-q)*0.02)));c.due=ymd(addD(new Date(),c.iv));}
 let flipped=false,filtroM='';
-const segP=k=>`<div class="seg" style="margin-bottom:12px">${[['','🃏 Tarjetas'],['quiz','🎯 Quiz'],['sim','❓ Preguntas guía']].map(([a,b])=>`<button class="${k===a?'on':''}" onclick="location.hash='#practicar${a?'/'+a:''}'">${b}</button>`).join('')}</div>`;
-V.practicar=(modo)=>{if(modo==='sim')return vistaSim();if(modo==='quiz')return segP('quiz')+vistaQuizMenu();
+const segP=k=>`<div class="seg" style="margin-bottom:12px">${[['','🃏 Tarjetas'],['quiz','🎯 Quiz'],['banco','🏦 Banco'],['sim','❓ Guía']].map(([a,b])=>`<button class="${k===a?'on':''}" onclick="location.hash='#practicar${a?'/'+a:''}'">${b}</button>`).join('')}</div>`;
+V.practicar=(modo)=>{if(modo==='sim')return vistaSim();if(modo==='quiz')return segP('quiz')+vistaQuizMenu();if(modo==='banco')return segP('banco')+vistaBanco();
  const due=cartasPendientes().filter(c=>!filtroM||UMAP[c.u].m===filtroM);
  let x=segP('');
  x+=`<div class="card hl"><div class="row" style="justify-content:space-between"><h1 style="margin:0">Tarjetas de hoy</h1><span class="tag">${due.length} pendientes · ${S.cards.length} en total</span></div>
@@ -995,7 +999,9 @@ const LEYES=(window.CONTENIDO&&window.CONTENIDO.unidades)?window.CONTENIDO:{fuen
 let PACKS={}; // paquetes privados por id (IndexedDB, solo en este dispositivo)
 let PACK=null; // vista combinada de todos los paquetes
 const slug=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,60)||'paquete';
-function mezclaPacks(){const ids=Object.keys(PACKS).sort((a,b)=>(PACKS[a].ts||0)-(PACKS[b].ts||0));if(!ids.length){PACK=null;return;}
+let BANCO=null;
+function mezclaBanco(ids){const B={bancos:{},items:[]};ids.forEach(id=>{const b=PACKS[id].banco;if(!b)return;Object.assign(B.bancos,b.bancos||{});(b.items||[]).forEach(it=>B.items.push(Object.assign({},it,{_k:B.items.length})));});BANCO=B.items.length?B:null;}
+function mezclaPacks(){const ids=Object.keys(PACKS).sort((a,b)=>(PACKS[a].ts||0)-(PACKS[b].ts||0));mezclaBanco(ids);if(!ids.length){PACK=null;return;}
  const M={fuentes:{},unidades:{}};ids.forEach(id=>{const p=PACKS[id];Object.entries(p.fuentes||{}).forEach(([k,v])=>{M.fuentes[id+'/'+k]=v;});Object.entries(p.unidades||{}).forEach(([u,c])=>{M.unidades[u]=Object.assign({},c,{fuente:id+'/'+c.fuente,_pack:id});});});PACK=M;}
 function CONT(id){return (PACK&&PACK.unidades&&PACK.unidades[id])||LEYES.unidades[id]||null;}
 function esPriv(id){return !!(PACK&&PACK.unidades&&PACK.unidades[id]);}
@@ -1098,17 +1104,18 @@ function activarCartas(id,soloCap){const c=CONT(id),f=FUENTE(id);const ns=soloCa
 function vistaQuizU(id){const c=CONT(id),ns=nsCap(id),qs=(c.quiz||[]).filter(q=>ns.has(q.n));const z=S.qz&&S.qz[id];const ne=z?Object.keys(z.err).length:0;const d=dominio(id);
  if(!qs.length)return`<div class="card muted">Esta unidad no tiene preguntas de quiz.</div>`;
  const cnt={};qs.forEach(q=>cnt[q.tipo]=(cnt[q.tipo]||0)+1);
- return `<div class="card hl">${capsDe(id).length?chipsCap(id)+'<div style="height:10px"></div>':''}<div class="xpbox">${ring(d,64)}<div><h3 style="margin:0">Quiz ${capSel?'del capítulo':'de la unidad'}</h3><div class="small muted">${qs.length} preguntas · ${cnt.mc||0} opción múltiple · ${cnt.vf||0} verdadero/falso · ${(cnt.blank||0)+(cnt.abierta||0)} completar</div><div class="small">Dominio: ${d}% (preguntas distintas acertadas)${z?` · ${z.c}/${z.n} aciertos totales`:''}</div></div></div>
- <div class="grid g3 r" style="margin-top:12px"><button class="btn" onclick="iniciarQuiz({modo:'rapido',uids:['${id}'],n:10,cap:1})">⚡ 10 preguntas</button><button class="btn sec" onclick="iniciarQuiz({modo:'unidad',uids:['${id}'],n:9999,pend:1,cap:1})">🎯 Las que no he acertado</button><button class="btn sec" ${ne?'':'disabled'} onclick="iniciarQuiz({modo:'errores',uids:['${id}'],n:9999})">❌ Mis errores (${ne})</button></div>
+ return `<div class="card hl">${capsDe(id).length?chipsCap(id)+'<div style="height:10px"></div>':''}<div class="xpbox">${ring(d,64)}<div><h3 style="margin:0">Quiz ${capSel?'del capítulo':'de la unidad'}</h3><div class="small muted">${qs.length} preguntas · ${qs.filter(q=>q.ex).length} estilo examen · ${cnt.mc||0} opción múltiple · ${cnt.vf||0} verdadero/falso · ${(cnt.blank||0)+(cnt.abierta||0)} completar</div><div class="small">Dominio: ${d}% (preguntas distintas acertadas)${z?` · ${z.c}/${z.n} aciertos totales`:''}</div></div></div>
+ <div class="grid g3 r" style="margin-top:12px"><button class="btn" onclick="iniciarQuiz({modo:'rapido',uids:['${id}'],n:10,cap:1})">⚡ 10 preguntas</button><button class="btn sec" onclick="iniciarQuiz({modo:'unidad',uids:['${id}'],n:9999,pend:1,cap:1})">🎯 Las que no he acertado</button><button class="btn sec" ${ne?'':'disabled'} onclick="iniciarQuiz({modo:'errores',uids:['${id}'],n:9999})">❌ Mis errores (${ne})</button>${qs.some(q=>q.ex)?`<button class="btn sec" onclick="iniciarQuiz({modo:'examen',uids:['${id}'],n:10,ex:1,cap:1})">📝 Estilo examen</button>`:''}</div>
  <p class="muted small" style="margin-top:8px">Cada respuesta se justifica con la cita del artículo. Preguntas generadas automáticamente a partir del texto oficial: si algo te parece ambiguo, verifica en «Leer».</p></div>`;}
 
 /* --- Motor de quiz --- */
 let QZ=null,qzInt=null;
-const MODOS={rapido:'⚡ Repaso rápido',sim:'⏱ Simulacro cronometrado',errores:'❌ Repaso de errores',unidad:'🎯 Práctica de la unidad'};
+const MODOS={rapido:'⚡ Repaso rápido',sim:'⏱ Simulacro cronometrado',errores:'❌ Repaso de errores',unidad:'🎯 Práctica de la unidad',examen:'📝 Estilo examen',banco:'🏦 Banco tipo examen',bancosim:'🏦 Simulacro con banco',bancoerr:'🏦 Errores del banco'};
+const exW=q=>q&&q.ex?0:1; // prioridad a reactivos estilo examen
 function iniciarQuiz(cfg){let pool=[];
- cfg.uids.forEach(u=>{const c=CONT(u);if(!c||!c.quiz)return;const z=S.qz&&S.qz[u];const ns=cfg.cap&&capSel?nsCap(u):null;c.quiz.forEach((q,i)=>{if(ns&&!ns.has(q.n))return;if(cfg.modo==='sim'&&q.tipo==='abierta')return;if(cfg.modo==='errores'&&!(z&&z.err[i]))return;if(cfg.pend&&z&&z.ok[i])return;pool.push({u,i});});});
+ cfg.uids.forEach(u=>{const c=CONT(u);if(!c||!c.quiz)return;const z=S.qz&&S.qz[u];const ns=cfg.cap&&capSel?nsCap(u):null;c.quiz.forEach((q,i)=>{if(ns&&!ns.has(q.n))return;if(cfg.modo==='sim'&&q.tipo==='abierta')return;if(cfg.modo==='errores'&&!(z&&z.err[i]))return;if(cfg.pend&&z&&z.ok[i])return;if(cfg.ex&&!q.ex)return;pool.push({u,i,w:exW(q)*0.6+Math.random()});});});
  if(!pool.length){toast(cfg.modo==='errores'?'No tienes errores pendientes 🎉':'No hay preguntas disponibles con ese filtro.');return;}
- shuffle(pool);
+ shuffle(pool);if(cfg.modo!=='errores')pool.sort((a,b)=>a.w-b.w);
  if(cfg.uids.length>1){// intercalar unidades: evitar dos seguidas de la misma unidad
   const out=[];while(pool.length&&out.length<cfg.n){let j=pool.findIndex(p=>!out.length||p.u!==out[out.length-1].u);if(j<0)j=0;out.push(pool.splice(j,1)[0]);}pool=out;}
  const items=pool.slice(0,cfg.n);
@@ -1118,8 +1125,17 @@ function iniciarQuiz(cfg){let pool=[];
 function tickQuiz(){if(!QZ||!QZ.fin){clearInterval(qzInt);return;}const r=QZ.fin-Date.now();const e=$('#qzT');
  if(r<=0){clearInterval(qzInt);QZ.timeout=true;terminarQuiz();return;}
  if(e){const m=Math.floor(r/60000),s=Math.floor(r/1000)%60;e.textContent=`⏱ ${m}:${pad(s)}`;e.classList.toggle('low',r<60000);}}
-function qAct(){const it=QZ.items[QZ.i];return{it,q:CONT(it.u).quiz[it.i]};}
-function fundamento(u,q){const c=CONT(u),E=etq(u),f=FUENTE(u);const a=(c.art||[]).find(x=>x.n===q.n);const t=a?a.t.filter(p=>!p.startsWith('§ ')).join(' '):'';
+function bancoQ(it){const b=BANCO&&BANCO.items[it.b];if(!b)return{tipo:'mc',q:'(reactivo no disponible: vuelve a importar el paquete del banco)',ops:['—'],a:'—',banco:1};const ops=(it.ord||b.ops.map((_,k)=>k)).map(k=>b.ops[k]);return{tipo:'mc',q:b.q,ops,a:b.ops[b.a],n:b.n,banco:1,bk:b};}
+function qDe(it){return it.b!=null?bancoQ(it):CONT(it.u).quiz[it.i];}
+function qAct(){const it=QZ.items[QZ.i];return{it,q:qDe(it)};}
+function fundamentoBanco(u,q){const b=q.bk||{},B=(BANCO&&BANCO.bancos[b.b])||{};const c=CONT(u);const E=b.b==='LNUF'?'Art.':'Párr.';const a=c&&(c.art||[]).find(x=>x.n===b.n);
+ let s=`<b>🏦 ${esc(B.nombre||b.b)}</b> <span class="cont-tag ${b.st==='v'?'ver':'nv'}">${b.st==='v'?'✓ verificado':'no verificado'}</span>`;
+ if(b.st==='v'&&b.n)s+=`<br>Respuesta comprobada en el texto: <b>${E} ${esc(b.n)}${b.pag?`, pág. ${esc(b.pag)}`:''}</b> (${b.b==='LNUF'?'LNUF':'Manual de Adiestramiento 2022'}).`;
+ else if(b.st!=='v')s+=`<br><span class="small">${/^(DH|ML)/.test(b.b)?'No tenemos el texto de este manual en la app: la clave es la del banco y no se pudo comprobar.':'La clave del banco no se pudo confirmar en el texto disponible.'} Compruébala en tu manual.</span>`;
+ if(b.nota)s+=`<br><span class="small">ℹ️ ${esc(b.nota)}</span>`;
+ if(a){const t=a.t.filter(p=>!p.startsWith('§ ')).join(' ');s+=`<br><span class="small">«${esc(t.length>420?t.slice(0,420).replace(/\s\S*$/,'')+'…':t)}»</span><br><a href="javascript:void 0" class="small" onclick="irArt('${u}','${esc(b.n)}')">Leer el ${E==='Art.'?'artículo':'párrafo'} completo →</a>`;}
+ return s;}
+function fundamento(u,q){if(q.banco)return fundamentoBanco(u,q);const c=CONT(u),E=etq(u),f=FUENTE(u);const a=(c.art||[]).find(x=>x.n===q.n);const t=a?a.t.filter(p=>!p.startsWith('§ ')).join(' '):'';
  let s=`<b>📜 Fundamento: ${esc(E)} ${esc(q.n)}${a&&a.pag?`, pág. ${esc(a.pag)}`:''} (${esc(f.abbr||f.nombre)})</b>`;
  if(q.tipo==='vf'&&q.a===false&&q.nota)s+=`<br>${esc(q.nota)}`;
  if(q.tipo==='vf'&&q.a===false&&q.real)s+=`<br>El texto citado corresponde en realidad al <b>${esc(E)} ${esc(q.real)}</b>.`;
@@ -1131,7 +1147,7 @@ V.quiz=()=>{if(!QZ)return `<div class="card">No hay un quiz en curso. <a href="#
  const {it,q}=qAct();const u=UMAP[it.u];const r=QZ.resp;
  let x=`<div class="card"><div class="qhead"><span class="tag">${MODOS[QZ.modo]}</span>${QZ.fin?`<span id="qzT" class="timerq">⏱</span>`:''}<span class="combo">${g().st.run>=2&&!QZ.exam?`🔥 x${g().st.run}`:''}</span><span class="tag k">${QZ.i+1}/${QZ.items.length}</span>${btnSon()}</div>
  <div style="margin:8px 0">${barra(pct(QZ.i,QZ.items.length))}</div>
- <div class="small">${tagM(u.m)} <span class="muted">${esc(u.tema)}</span>${esPriv(it.u)?'<span class="cont-tag priv">privado</span>':''}</div>
+ <div class="small">${tagM(u.m)} <span class="muted">${esc(u.tema)}</span>${esPriv(it.u)||q.banco?'<span class="cont-tag priv">privado</span>':''}${q.banco&&q.bk?`<span class="cont-tag ${q.bk.st==='v'?'ver':'nv'}">${q.bk.st==='v'?'✓ verificado':'no verificado'}</span>`:''}${q.ex?'<span class="cont-tag ex">estilo examen</span>':''}</div>
  <div class="q" style="font-size:1rem;margin-top:10px">${q.tipo==='vf'?'¿Verdadero o falso? ':''}${esc(q.q)}</div>`;
  const dis=r?'disabled':'';
  if(q.tipo==='mc'||(q.tipo==='blank'&&q.ops)){x+=q.ops.map((o,k)=>{let cl='';if(r){if(o===q.a)cl='ok';else if(r.val===k)cl='bad';}return `<button class="opt ${cl}" ${dis} onclick="qzResp(${k},this)"><span class="lt">${String.fromCharCode(65+k)}</span><span>${esc(o)}</span></button>`;}).join('');}
@@ -1145,7 +1161,8 @@ V.quiz=()=>{if(!QZ)return `<div class="card">No hay un quiz en curso. <a href="#
  x+=`</div><div class="row"><button class="btn sm sec" onclick="if(confirm('¿Terminar el quiz ahora?'))terminarQuiz()">Terminar</button></div>`;
  return x;};
 V._after_quiz=()=>{if(QZ&&QZ.fin)tickQuiz();const i=$('#qzIn');if(i&&!i.disabled&&!(QZ&&QZ.ver))i.focus({preventScroll:true});};
-function registra(it,ok){const z=QZS(it.u),G=g();z.n++;G.st.resp++;if(ok){z.c++;z.ok[it.i]=1;delete z.err[it.i];G.st.ok++;G.st.run++;G.st.maxRun=Math.max(G.st.maxRun,G.st.run);}else{z.err[it.i]=1;G.st.run=0;}
+function registra(it,ok){const G=g();if(it.b!=null){S.bk=S.bk||{};const id=(BANCO.items[it.b]||{}).id||String(it.b);const r=S.bk[id]=S.bk[id]||{n:0,c:0};r.n++;G.st.resp++;if(ok){r.c++;delete r.e;G.st.ok++;G.st.run++;G.st.maxRun=Math.max(G.st.maxRun,G.st.run);}else{r.e=1;G.st.run=0;}const xp=ok?10:2;QZ.xp+=xp;marcaActividad();ganaXP(xp);return;}
+ const z=QZS(it.u);z.n++;G.st.resp++;if(ok){z.c++;z.ok[it.i]=1;delete z.err[it.i];G.st.ok++;G.st.run++;G.st.maxRun=Math.max(G.st.maxRun,G.st.run);}else{z.err[it.i]=1;G.st.run=0;}
  const xp=ok?10:2;QZ.xp+=xp;marcaActividad();ganaXP(xp);}
 function qzResp(k,el){if(QZ.resp)return;const {it,q}=qAct();const ok=q.tipo==='vf'?((k===0)===q.a):q.ops[k]===q.a;qzFin(it,ok,{val:k},el);}
 function qzTxt(){if(QZ.resp)return;const {it,q}=qAct();const v=($('#qzIn')||{}).value||'';if(!v.trim()){toast('Escribe tu respuesta.');return;}
@@ -1162,15 +1179,15 @@ function qzSig(){if(QZ.i+1>=QZ.items.length){terminarQuiz();return;}QZ.i++;QZ.re
 function terminarQuiz(){if(!QZ)return;cierraQuiz();if(location.hash==='#quiz')render();else location.hash='#quiz';}
 function cierraQuiz(){if(QZ.tf!=null)return;clearInterval(qzInt);QZ.i=QZ.items.length;QZ.tf=Date.now();
  const ok=QZ.res.filter(Boolean).length,tot=QZ.items.length;const p=pct(ok,tot);
- if(QZ.exam){S.sims.push({f:hoy(),n:tot,pct:p,tipo:'cronometrado'});const G=g();if(p>=80)G.st.sim80=1;if(p===100&&tot>=10)G.st.sim100=1;ganaXP(20);}
+ if(QZ.exam){S.sims.push({f:hoy(),n:tot,pct:p,tipo:QZ.modo==='bancosim'?'banco':'cronometrado'});const G=g();if(p>=80)G.st.sim80=1;if(p===100&&tot>=10)G.st.sim100=1;ganaXP(20);}
  revisaLogros();guardar();if(p>=80)setTimeout(()=>confeti(200),250);}
 function vistaResultado(){cierraQuiz();
  const tot=QZ.items.length,ok=QZ.res.filter(Boolean).length,p=pct(ok,tot);const seg=Math.round((QZ.tf-QZ.t0)/1000);
  const malos=QZ.items.map((it,k)=>({it,k})).filter(o=>QZ.res[o.k]===false);const sinR=QZ.items.filter((_,k)=>QZ.res[k]==null).length;
  let x=`<div class="card hl" style="text-align:center"><div style="display:flex;justify-content:center">${ring(p,96,p>=80?'var(--ok)':p>=60?'var(--warn)':'var(--mal)')}</div><h1>${p>=90?'¡Excelente!':p>=80?'¡Aprobada con honores!':p>=60?'Buen trabajo':'A reforzar'} · ${p}%</h1>
  <p>${ok} correctas de ${tot}${sinR?` · ${sinR} sin responder${QZ.timeout?' (se acabó el tiempo)':''}`:''} · ${Math.floor(seg/60)} min ${seg%60} s · <b>+${QZ.xp+(QZ.exam?20:0)} XP</b></p></div>`;
- if(malos.length)x+=`<div class="card"><h3>Revisa tus errores (${malos.length})</h3>${malos.map(o=>{const q=CONT(o.it.u).quiz[o.it.i];return `<div class="fb bad" style="margin:10px 0"><div class="small">${tagM(UMAP[o.it.u].m)}</div><b>${q.tipo==='vf'?'V/F: ':''}${esc(q.q)}</b><br>${q.tipo==='mc'||q.tipo==='blank'?`Correcta: <b>${esc(q.a)}</b><br>`:q.tipo==='vf'?`Correcta: <b>${q.a?'Verdadero':'Falso'}</b><br>`:''}${fundamento(o.it.u,q)}</div>`;}).join('')}</div>`;
- x+=`<div class="row">${malos.length?`<button class="btn" onclick="iniciarQuiz({modo:'errores',uids:[...new Set(QZ.items.map(i=>i.u))],n:9999})">❌ Repasar errores</button>`:''}<button class="btn sec" onclick="const v=QZ.volver;QZ=null;location.hash=v==='#quiz'?'#practicar/quiz':v">Terminar</button></div>`;
+ if(malos.length)x+=`<div class="card"><h3>Revisa tus errores (${malos.length})</h3>${malos.map(o=>{const q=qDe(o.it);return `<div class="fb bad" style="margin:10px 0"><div class="small">${tagM(UMAP[o.it.u].m)}</div><b>${q.tipo==='vf'?'V/F: ':''}${esc(q.q)}</b><br>${q.tipo==='mc'||q.tipo==='blank'?`Correcta: <b>${esc(q.a)}</b><br>`:q.tipo==='vf'?`Correcta: <b>${q.a?'Verdadero':'Falso'}</b><br>`:''}${fundamento(o.it.u,q)}</div>`;}).join('')}</div>`;
+ x+=`<div class="row">${malos.length?(QZ.items[0]&&QZ.items[0].b!=null?`<button class="btn" onclick="iniciarBanco({err:1,n:9999})">❌ Repasar errores del banco</button>`:`<button class="btn" onclick="iniciarQuiz({modo:'errores',uids:[...new Set(QZ.items.map(i=>i.u))],n:9999})">❌ Repasar errores</button>`):''}<button class="btn sec" onclick="const v=QZ.volver;QZ=null;location.hash=v==='#quiz'?'#practicar/quiz':v">Terminar</button></div>`;
  return x;}
 /* --- Practicar › Quiz (menú) --- */
 let qzOr='vistas';
@@ -1178,14 +1195,38 @@ function unidadesCon(o){const con=UNITS.filter(u=>CONT(u.id)&&(CONT(u.id).quiz||
 function vistaQuizMenu(){const us=unidadesCon(qzOr);const nq=us.reduce((a,u)=>a+CONT(u.id).quiz.length,0);
  const nerr=UNITS.reduce((a,u)=>a+(S.qz&&S.qz[u.id]?Object.keys(S.qz[u.id].err).length:0),0);
  const ms=MATERIAS.filter(m=>m.units.some(u=>CONT(u.id)));
- let x=`<div class="card hl"><h1>Quiz con el texto oficial</h1><p class="small muted">Preguntas de opción múltiple, verdadero/falso y completar, cada una con su artículo de fundamento.</p>
+ let x=`<div class="card hl"><h1>Quiz con el texto oficial</h1><p class="small muted">El formato principal es <b>estilo examen</b> (definición → concepto, «¿A qué se refiere?», listas y orden), más verdadero/falso y completar. Cada pregunta trae su fundamento.</p>
  <label>Origen</label><select onchange="qzOr=this.value;render()"><option value="vistas" ${qzOr==='vistas'?'selected':''}>Unidades que ya leí o practiqué</option><option value="todas" ${qzOr==='todas'?'selected':''}>Todo el contenido disponible</option>${ms.map(m=>`<option value="${m.id}" ${qzOr===m.id?'selected':''}>${esc(m.nombre)}</option>`).join('')}</select>
  <p class="muted small">${us.length} unidades · ${nq} preguntas</p></div>
+ <div class="card"><h3>📝 Estilo examen</h3><p class="small muted">10 reactivos como los del examen: fragmento del texto → concepto, con distractores de la misma sección.</p><button class="btn" onclick="iniciarQuiz({modo:'examen',uids:unidadesCon(qzOr).map(u=>u.id),n:10,ex:1})">Empezar</button></div>
+ <a class="card" href="#practicar/banco" style="display:block;text-decoration:none;color:inherit"><h3>🏦 Banco tipo examen</h3><p class="small muted">${BANCO?`${BANCO.items.length} reactivos de bancos de práctica (paquete privado), solo del temario.`:'Importa el paquete privado del banco para practicar con reactivos de bancos anteriores.'} →</p></a>
  <div class="card"><h3>⚡ Repaso rápido</h3><p class="small muted">10 preguntas intercaladas, con retroalimentación inmediata.</p><button class="btn" onclick="iniciarQuiz({modo:'rapido',uids:unidadesCon(qzOr).map(u=>u.id),n:10})">Empezar</button></div>
  <div class="card"><h3>⏱ Simulacro cronometrado</h3><p class="small muted">Como el examen: sin retroalimentación hasta el final. 1 minuto por pregunta.</p><div class="row"><select id="qzN" style="width:auto"><option>20</option><option selected>40</option><option>60</option><option>100</option></select><button class="btn" onclick="const n=+$('#qzN').value;iniciarQuiz({modo:'sim',uids:unidadesCon(qzOr).map(u=>u.id),n,min:n})">Comenzar simulacro</button></div></div>
  <div class="card"><h3>❌ Repaso de errores</h3><p class="small muted">Las preguntas que fallaste y aún no has corregido (${nerr}).</p><button class="btn ${nerr?'':'sec'}" ${nerr?'':'disabled'} onclick="iniciarQuiz({modo:'errores',uids:UNITS.map(u=>u.id),n:30})">Repasar (${Math.min(30,nerr)})</button></div>`;
  const ult=S.sims.filter(s=>s.tipo==='cronometrado').slice(-6).reverse();
  if(ult.length)x+=`<div class="card"><h3>Últimos simulacros cronometrados</h3>${ult.map(s=>`<div class="task"><div class="tx">${fmt(s.f)} · ${s.n} preguntas</div><span class="min">${s.pct}%</span></div>`).join('')}</div>`;
+ return x;}
+/* --- Banco tipo examen (paquete privado) --- */
+let bkF={b:'',u:'',v:''};
+function bancoPool(f){if(!BANCO)return[];S.bk=S.bk||{};return BANCO.items.filter(x=>(!f.b||x.b===f.b)&&(!f.u||x.u===f.u)&&(!f.v||x.st==='v')&&(!f.err||(S.bk[x.id]&&S.bk[x.id].e)));}
+function iniciarBanco(cfg){const f=Object.assign({},bkF,cfg.err?{b:'',u:'',v:''}:{},{err:cfg.err});let pool=bancoPool(f);
+ if(!pool.length){toast(cfg.err?'No tienes errores pendientes en el banco 🎉':'No hay reactivos con ese filtro.');return;}
+ pool=shuffle(pool.slice());S.bk=S.bk||{};pool.sort((a,b)=>((S.bk[a.id]&&S.bk[a.id].c)?1:0)-((S.bk[b.id]&&S.bk[b.id].c)?1:0));
+ const items=pool.slice(0,cfg.n||10).map(x=>({b:x._k,u:x.u,ord:shuffle(x.ops.map((_,k)=>k))}));
+ const modo=cfg.err?'bancoerr':cfg.sim?'bancosim':'banco';
+ QZ={modo,items,i:0,res:[],resp:null,t0:Date.now(),fin:cfg.sim?Date.now()+items.length*60000:0,exam:!!cfg.sim,xp:0,volver:'#practicar/banco'};
+ clearInterval(qzInt);if(QZ.fin)qzInt=setInterval(tickQuiz,500);if(location.hash==='#quiz')render();else location.hash='#quiz';}
+function vistaBanco(){if(!BANCO)return `<div class="card hl"><h1>🏦 Banco tipo examen</h1><p class="small">Practica con reactivos de bancos de exámenes anteriores, filtrados al temario y revisados contra el texto oficial cuando lo tenemos.</p><div class="card info">Este material es de terceros, por eso <b>no viene en la app pública</b>. Importa el archivo privado <b>pack-banco-examen.json</b> en <a href="#ajustes">Ajustes › Contenido privado</a>. Se guarda solo en este dispositivo.</div></div>`;
+ S.bk=S.bk||{};const bs=BANCO.bancos,ks=Object.keys(bs);const pool=bancoPool(bkF);const nerr=bancoPool({err:1}).length;
+ const us=[...new Set(BANCO.items.map(x=>x.u))].filter(u=>UMAP[u]);const hechos=pool.filter(x=>S.bk[x.id]&&S.bk[x.id].c).length;
+ let x=`<div class="card hl"><h1>🏦 Banco tipo examen</h1><p class="small muted">Reactivos de bancos de práctica (paquete privado), <b>solo de los capítulos del temario</b>. «✓ verificado» = la clave se comprobó en el texto oficial (LNUF o Manual de Adiestramiento 2022); «no verificado» = no se pudo comprobar (verifícala en tu manual). Se excluyeron los reactivos fuera del temario y los que contradicen el texto vigente.</p>
+ <div class="grid g3 r"><div><label>Banco</label><select onchange="bkF.b=this.value;render()"><option value="">Todos</option>${ks.map(k=>`<option value="${esc(k)}" ${bkF.b===k?'selected':''}>${esc(bs[k].nombre)}</option>`).join('')}</select></div>
+ <div><label>Unidad del temario</label><select onchange="bkF.u=this.value;render()"><option value="">Todas</option>${us.map(u=>`<option value="${u}" ${bkF.u===u?'selected':''}>${esc(UMAP[u].m)} · ${esc(UMAP[u].tema)}</option>`).join('')}</select></div>
+ <div><label>Estado</label><select onchange="bkF.v=this.value;render()"><option value="">Verificados y no verificados</option><option value="v" ${bkF.v?'selected':''}>Solo verificados</option></select></div></div>
+ <p class="muted small" style="margin-top:8px">${pool.length} reactivos con este filtro · ${pool.filter(x=>x.st==='v').length} verificados · ${hechos} ya acertados</p>
+ <div class="grid g3 r"><button class="btn" onclick="iniciarBanco({n:10})">⚡ 10 reactivos</button><button class="btn sec" onclick="iniciarBanco({n:40,sim:1})">⏱ Simulacro 40 (40 min)</button><button class="btn sec" ${nerr?'':'disabled'} onclick="iniciarBanco({err:1,n:30})">❌ Mis errores (${nerr})</button></div></div>
+ <div class="card"><h3>Bancos incluidos</h3><table class="bk-t"><tr><th>Banco</th><th>Total</th><th>En temario</th><th>Verif.</th><th>Excluidos</th></tr>${ks.map(k=>{const b=bs[k];const ex=Object.values(b.excluidos||{}).reduce((a,c)=>a+c,0);return `<tr><td><b>${esc(b.nombre)}</b><br><span class="muted">${esc(b.autor)}</span></td><td>${b.total}</td><td>${b.incluidos}</td><td>${b.verificados}</td><td>${ex}</td></tr>`;}).join('')}</table>
+ ${ks.map(k=>{const e=bs[k].excluidos||{};const L=Object.entries(e);return L.length?`<p class="small muted" style="margin:6px 0 0"><b>${esc(bs[k].nombre)}:</b> ${L.map(([m,c])=>`${c} · ${esc(m)}`).join(' · ')}</p>`:'';}).join('')}</div>`;
  return x;}
 /* --- Logros --- */
 V.logros=()=>{const G=g(),n=nivel(G.xp);
@@ -1209,11 +1250,14 @@ function validaPack(x){if(!x||typeof x!=='object'||!x.unidades||typeof x.unidade
  const S_=v=>String(v==null?'':v);
  Object.entries(x.unidades).forEach(([id,u])=>{if(!UMAP[id]||!u||typeof u!=='object'){ign.push(id);return;}
   const art=(Array.isArray(u.art)?u.art:[]).filter(a=>a&&a.n!=null).map(a=>({n:S_(a.n),t:(Array.isArray(a.t)?a.t:[a.t]).map(S_).filter(Boolean),sec:S_(a.sec),cap:S_(a.cap),pag:S_(a.pag)}));
-  const quiz=(Array.isArray(u.quiz)?u.quiz:[]).filter(q=>q&&['mc','vf','blank','abierta'].includes(q.tipo)&&q.q!=null&&q.a!=null).map(q=>{const o={tipo:q.tipo,q:S_(q.q),a:q.tipo==='vf'?!!q.a:S_(q.a),n:S_(q.n)};if(Array.isArray(q.ops)&&q.ops.length>=2){o.ops=q.ops.map(S_);if(!o.ops.includes(o.a))o.ops.push(o.a);}if(q.tipo==='mc'&&!o.ops)return null;if(q.real)o.real=S_(q.real);if(q.nota)o.nota=S_(q.nota);if(q.num)o.num=1;if(q.cap)o.cap=S_(q.cap);return o;}).filter(Boolean);
+  const quiz=(Array.isArray(u.quiz)?u.quiz:[]).filter(q=>q&&['mc','vf','blank','abierta'].includes(q.tipo)&&q.q!=null&&q.a!=null).map(q=>{const o={tipo:q.tipo,q:S_(q.q),a:q.tipo==='vf'?!!q.a:S_(q.a),n:S_(q.n)};if(Array.isArray(q.ops)&&q.ops.length>=2){o.ops=q.ops.map(S_);if(!o.ops.includes(o.a))o.ops.push(o.a);}if(q.tipo==='mc'&&!o.ops)return null;if(q.real)o.real=S_(q.real);if(q.nota)o.nota=S_(q.nota);if(q.num)o.num=1;if(q.cap)o.cap=S_(q.cap);if(['def','ref','lista','orden'].includes(q.ex))o.ex=q.ex;return o;}).filter(Boolean);
   out.unidades[id]={fuente:S_(u.fuente||Object.keys(out.fuentes)[0]||'Privado'),encabezados:(Array.isArray(u.encabezados)?u.encabezados:[]).map(h=>({label:S_(h.label),name:S_(h.name)})),art,
    resumen:(Array.isArray(u.resumen)?u.resumen:[]).map(r=>({n:S_(r.n),s:S_(r.s)})),puntos:(Array.isArray(u.puntos)?u.puntos:[]).map(p=>({n:S_(p.n),lead:S_(p.lead),items:(p.items||[]).map(S_)})),
    cards:(Array.isArray(u.cards)?u.cards:[]).filter(c=>c&&c.f&&c.b).map((c,i)=>({id:S_(c.id||`${id}:priv:${i}`),f:S_(c.f),b:S_(c.b),n:S_(c.n)})),quiz};});
- if(!Object.keys(out.unidades).length)throw new Error('Ninguna unidad del paquete coincide con el temario.');
+ if(x.banco&&Array.isArray(x.banco.items)){const bs={};Object.entries(x.banco.bancos||{}).forEach(([k,b])=>{if(b&&typeof b==='object')bs[S_(k)]={nombre:S_(b.nombre||k),autor:S_(b.autor),fuente:S_(b.fuente),total:+b.total||0,incluidos:+b.incluidos||0,verificados:+b.verificados||0,no_verificados:+b.no_verificados||0,excluidos:Object.fromEntries(Object.entries(b.excluidos||{}).map(([m,c])=>[S_(m),+c||0]))};});
+  const its=x.banco.items.filter(b=>b&&UMAP[b.u]&&b.q!=null&&Array.isArray(b.ops)&&b.ops.length>=2&&Number.isInteger(b.a)&&b.a>=0&&b.a<b.ops.length).map((b,i)=>({id:S_(b.id||'b'+i),b:S_(b.b),u:S_(b.u),q:S_(b.q),ops:b.ops.map(S_),a:b.a,st:b.st==='v'?'v':'nv',n:b.n!=null?S_(b.n):'',pag:Array.isArray(b.pag)?b.pag.map(S_).join('–'):S_(b.pag),nota:S_(b.nota)}));
+  if(its.length)out.banco={bancos:bs,items:its};}
+ if(!Object.keys(out.unidades).length&&!out.banco)throw new Error('Ninguna unidad del paquete coincide con el temario.');
  return {pack:out,ign};}
 const LSP='planAscensoCap1.packs';
 async function guardaPack(p){try{await IDB.set('pack:'+p.id,p);}catch(e){const all=JSON.parse(localStorage.getItem(LSP)||'{}');all[p.id]=p;localStorage.setItem(LSP,JSON.stringify(all));}}
@@ -1234,7 +1278,7 @@ async function cargarPack(){PACKS={};
  mezclaPacks();if(PACK)render();}
 function listaPacks(){const ids=Object.keys(PACKS).sort((a,b)=>(PACKS[a].ts||0)-(PACKS[b].ts||0));if(!ids.length)return '<p class="muted small">Aún no hay paquetes. Mientras tanto, esas unidades muestran las preguntas guía.</p>';
  return ids.map(id=>{const p=PACKS[id];const us=Object.keys(p.unidades);const tapadas=us.filter(u=>PACK&&PACK.unidades[u]&&PACK.unidades[u]._pack!==id);
-  return `<div class="fuente" style="display:flex;gap:8px;align-items:center"><div style="flex:1"><b>${esc(p.nombre)}</b><br><span class="muted">id: ${esc(id)} · ${us.length} unidad(es): ${esc(us.join(', '))} · importado ${fmt(p.importado)}</span>${tapadas.length?`<br><span class="dif">⚠ ${tapadas.length} unidad(es) las sustituye otro paquete importado después</span>`:''}</div><button class="btn sm sec" onclick="borrarPack('${esc(id)}')">Quitar</button></div>`;}).join('');}
+  return `<div class="fuente" style="display:flex;gap:8px;align-items:center"><div style="flex:1"><b>${esc(p.nombre)}</b><br><span class="muted">id: ${esc(id)} · ${us.length} unidad(es)${us.length?': '+esc(us.join(', ')):''}${p.banco?` · ${p.banco.items.length} reactivos de banco`:''} · importado ${fmt(p.importado)}</span>${tapadas.length?`<br><span class="dif">⚠ ${tapadas.length} unidad(es) las sustituye otro paquete importado después</span>`:''}</div><button class="btn sm sec" onclick="borrarPack('${esc(id)}')">Quitar</button></div>`;}).join('');}
 function plantillaPack(){const sin=UNITS.filter(u=>!LEYES.unidades[u.id]);const t={formato:'plan-ascenso-paquete',nombre:'Mis manuales (privado)',
   id:'mis-manuales',fuentes:{MANUAL:{nombre:'Nombre del manual',abbr:'Manual',reforma:'Edición / año',etiqueta:'Pág.',nota:'Texto capturado por mí de mi ejemplar oficial.'}},
   unidades:Object.fromEntries(sin.map(u=>[u.id,{_tema:`${u.m} · ${u.libro.nombre} · ${u.completo?u.grupo:u.titulo}`,fuente:'MANUAL',encabezados:[{label:u.completo?u.grupo:u.titulo,name:''}],art:[{n:'1',t:['Párrafo copiado del manual…']}],resumen:[{n:'1',s:'Idea clave…'}],puntos:[],cards:[{f:'Pregunta…',b:'Respuesta…',n:'1'}],quiz:[{tipo:'mc',q:'Pregunta…',ops:['A','B','C','D'],a:'A',n:'1'},{tipo:'vf',q:'Afirmación…',a:true,n:'1'},{tipo:'blank',q:'Texto con _____',a:'palabra',n:'1'},{tipo:'abierta',q:'Pregunta abierta…',a:'Respuesta…',n:'1'}]}]))};
@@ -1287,10 +1331,12 @@ function toggleSonido(){const G=g();G.sonido=!G.sonido;guardar();if(G.sonido)sfx
 const btnSon=()=>`<button class="hbtn" onclick="toggleSonido()" aria-label="${g().sonido?'Silenciar':'Activar sonido'}" title="Sonido">${g().sonido?'🔊':'🔇'}</button>`;
 
 /* respuesta registrada (quiz y sesión) */
-function regResp(uid,i,ok){const z=QZS(uid),G=g(),H=HD();z.n++;G.st.resp++;H.resp++;
- if(ok){z.c++;z.ok[i]=1;delete z.err[i];G.st.ok++;G.st.run++;G.st.maxRun=Math.max(G.st.maxRun,G.st.run);H.ok++;H.combo=Math.max(H.combo,G.st.run);}else{z.err[i]=1;G.st.run=0;}
+function regResp(uid,i,ok,bk){const z=bk?bkS(bk):QZS(uid),G=g(),H=HD();z.n++;G.st.resp++;H.resp++;
+ if(bk){if(ok){z.c++;delete z.e;}else z.e=1;}
+ if(ok){if(!bk){z.c++;z.ok[i]=1;delete z.err[i];}G.st.ok++;G.st.run++;G.st.maxRun=Math.max(G.st.maxRun,G.st.run);H.ok++;H.combo=Math.max(H.combo,G.st.run);}else{if(!bk)z.err[i]=1;G.st.run=0;}
  const xp=ok?10:2;marcaActividad();ganaXP(xp);revisaReto();return xp;}
-registra=function(it,ok){const xp=regResp(it.u,it.i,ok);if(QZ)QZ.xp+=xp;};
+function bkS(id){S.bk=S.bk||{};return S.bk[id]=S.bk[id]||{n:0,c:0};}
+registra=function(it,ok){const xp=regResp(it.u,it.i,ok,it.b!=null?((BANCO&&BANCO.items[it.b])||{}).id||('b'+it.b):null);if(QZ)QZ.xp+=xp;};
 const _calif=calif;calif=function(id,q){HD().cards++;_calif(id,q);revisaReto();guardar();};
 const _ganaXP=ganaXP;ganaXP=function(n){_ganaXP(n);const G=g();if(liga(xpSemana()).i>=2&&!G.st.oro){G.st.oro=1;revisaLogros();}};
 LOGROS.push(
@@ -1386,11 +1432,11 @@ function unidadFoco(){const G=g();const con=conTexto();if(!con.length)return nul
  const ult=G.foco&&UMAP[G.foco]?UMAP[G.foco].m:null;const otra=pend.find(u=>u.m!==ult);return (otra||pend[0]).id;}
 function quizDe(uid,ns,usados,max){const c=CONT(uid);if(!c||!c.quiz)return[];const z=S.qz&&S.qz[uid];
  const L=c.quiz.map((q,i)=>({q,i})).filter(o=>QOK(o.q)&&(!ns||ns.has(o.q.n))&&!usados.has(uid+':'+o.i));
- shuffle(L);L.sort((a,b)=>((z&&z.ok[a.i])?1:0)-((z&&z.ok[b.i])?1:0));
+ shuffle(L);L.forEach(o=>o.w=((z&&z.ok[o.i])?10:0)+exW(o.q)*0.7+Math.random()*0.6);L.sort((a,b)=>a.w-b.w);
  return L.slice(0,max).map(o=>{usados.add(uid+':'+o.i);return {k:'quiz',u:uid,i:o.i};});}
 function repasoMixto(foco,usados,n){const G=g();let P=[];
  UNITS.forEach(u=>{const c=CONT(u.id);if(!c||!c.quiz)return;const z=S.qz&&S.qz[u.id];const L=(G.lei||{})[u.id]||{};const vista=st(u.id)>=1;
-  c.quiz.forEach((q,i)=>{if(!QOK(q)||usados.has(u.id+':'+i))return;const err=z&&z.err[i];if(err||vista||L[q.n])P.push({u:u.id,i,w:err?0:(z&&z.ok[i]?2:1)+Math.random()});});});
+  c.quiz.forEach((q,i)=>{if(!QOK(q)||usados.has(u.id+':'+i))return;const err=z&&z.err[i];if(err||vista||L[q.n])P.push({u:u.id,i,w:err?0:(z&&z.ok[i]?2:1)+Math.random()+exW(q)*0.5});});});
  shuffle(P);P.sort((a,b)=>a.w-b.w);const out=[];while(P.length&&out.length<n){let j=P.findIndex(p=>!out.length||UMAP[p.u].m!==UMAP[out[out.length-1].u].m);if(j<0)j=0;const p=P.splice(j,1)[0];usados.add(p.u+':'+p.i);out.push({k:'quiz',u:p.u,i:p.i});}
  return out;}
 function planSesion(){const uid=unidadFoco();const items=[];let est=0;const usados=new Set();const bites=[];let ch=0;
